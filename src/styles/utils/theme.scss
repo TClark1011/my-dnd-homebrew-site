@@ -1,0 +1,55 @@
+// $var__font-dnd-body: Bookinsanity, serif;
+// $var__font-dnd-heading: "Mr Eaves", serif;
+// $var__font-dnd-sans: "Scaly Sans", sans-serif;
+$var__font-dnd-body: --font-dnd-body;
+$var__font-dnd-heading: --font-dnd-heading;
+$var__font-dnd-sans: --font-dnd-sans;
+$font-dnd-body: var($var__font-dnd-body);
+$font-dnd-heading: var($var__font-dnd-heading);
+$font-dnd-sans: var($var__font-dnd-sans);
+
+$var__color-bg: --color-bg;
+$var__color-text: --color-text;
+$var__color-block-bg: --color-block-bg;
+$var__color-table-odd-row-bg: --color-table-odd-row-bg;
+$color-bg: var($var__color-bg);
+$color-text: var($var__color-text);
+$color-block-bg: var($var__color-block-bg);
+$color-table-odd-row-bg: var($var__color-table-odd-row-bg);
+
+@mixin applyTheme($theme) {
+  #{$var__font-dnd-body}: #{map-get($theme, "font-dnd-body")};
+  #{$var__font-dnd-heading}: #{map-get($theme, "font-dnd-heading")};
+  #{$var__font-dnd-sans}: #{map-get($theme, "font-dnd-sans")};
+
+  #{$var__color-bg}: map-get($theme, "color-bg");
+  #{$var__color-text}: map-get($theme, "color-text");
+  #{$var__color-block-bg}: map-get($theme, "color-block-bg");
+  #{$var__color-table-odd-row-bg}: map-get($theme, "color-table-odd-row-bg");
+}
+
+$theme-fragment_ua-typography: (
+  "font-dnd-body": "Bookinsanity, serif",
+  "font-dnd-heading": "Mr Eaves, serif",
+  "font-dnd-sans": "Scaly Sans, sans-serif",
+);
+
+$ua-light: map-merge(
+  $theme-fragment_ua-typography,
+  (
+    "color-bg": #ffffff,
+    "color-text": #000000,
+    "color-block-bg": #d9d9d9,
+    "color-table-odd-row-bg": #f2f2f2,
+  )
+);
+
+$ua-dark: map-merge(
+  $theme-fragment_ua-typography,
+  (
+    "color-bg": #313339,
+    "color-text": #d3d5d8,
+    "color-block-bg": #202124,
+    "color-table-odd-row-bg": #202124,
+  )
+);

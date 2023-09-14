@@ -1,9 +1,16 @@
 // Partially based on the styles used by GM Binder
-@use "./utils/typography" as type;
-@use "./utils/colors" as color;
+@use "./utils/theme" as theme;
 
 html {
-  font-family: type.$font-dnd-body;
+  @include theme.applyTheme(theme.$ua-dark);
+
+  @media (prefers-color-scheme: light) {
+    @include theme.applyTheme(theme.$ua-light);
+  }
+
+  font-family: theme.$font-dnd-body;
+  background-color: theme.$color-bg;
+  color: theme.$color-text;
 }
 
 h1,
@@ -12,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: type.$font-dnd-heading;
+  font-family: theme.$font-dnd-heading;
   margin-bottom: 10.5px;
 }
 
@@ -28,6 +35,11 @@ h3 {
   font-size: 18pt;
   border-bottom: 1px solid;
   padding-bottom: 4px;
+}
+
+p,
+blockquote {
+  line-height: 1.25rem;
 }
 
 p {
@@ -48,18 +60,18 @@ p {
 }
 
 blockquote {
-  background-color: color.$block-bg;
+  background-color: theme.$color-block-bg;
   padding: 2px;
-  font-family: type.$font-dnd-sans;
+  font-family: theme.$font-dnd-sans;
 }
 
 table {
   width: 100%;
-  font-family: type.$font-dnd-sans;
+  font-family: theme.$font-dnd-sans;
   border-collapse: collapse;
 
   tbody tr:nth-child(odd) {
-    background-color: color.$table-odd-row-bg;
+    background-color: theme.$color-table-odd-row-bg;
   }
 
   th {
