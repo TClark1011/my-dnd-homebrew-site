@@ -30,8 +30,21 @@ h3 {
   padding-bottom: 4px;
 }
 
-p + p {
-  text-indent: 1rem;
+p {
+  --paragraph-first-line-indent: 1rem;
+  *:not(p) + & > strong:first-child {
+    // If a paragraph would not normally have its first line indented, but
+    // it starts with bold text, we indent it anyway
+    margin-left: var(--paragraph-first-line-indent);
+  }
+
+  & + p {
+    text-indent: var(--paragraph-first-line-indent);
+  }
+
+  & + *:not(p) {
+    margin-top: 10.5px;
+  }
 }
 
 blockquote {
@@ -40,6 +53,28 @@ blockquote {
   font-family: type.$font-dnd-sans;
 }
 
-* + blockquote {
+table {
+  width: 100%;
+  font-family: type.$font-dnd-sans;
+  border-collapse: collapse;
+
+  tbody tr:nth-child(odd) {
+    background-color: color.$table-odd-row-bg;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  td,
+  th {
+    padding: 0.2rem;
+  }
+}
+
+* + blockquote,
+* + table,
+blockquote + *,
+table + * {
   margin-top: 1rem;
 }
