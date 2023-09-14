@@ -1,5 +1,6 @@
 ---
 title: Style Demo
+hidden: true
 ---
 
 # Heading 1

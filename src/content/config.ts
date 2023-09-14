@@ -4,6 +4,7 @@ const homebrewCollection = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
+    hidden: z.boolean().default(false),
   }),
 });
 

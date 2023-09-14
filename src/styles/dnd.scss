@@ -20,7 +20,7 @@ h4,
 h5,
 h6 {
   font-family: theme.$font-dnd-heading;
-  margin-bottom: 10.5px;
+  margin-bottom: 0.2em;
 }
 
 h1 {
@@ -35,6 +35,18 @@ h3 {
   font-size: 18pt;
   border-bottom: 1px solid;
   padding-bottom: 4px;
+}
+
+h4 {
+  font-size: 14.9pt;
+}
+
+h5 {
+  font-size: 12pt;
+}
+
+h6 {
+  font-size: 1rem;
 }
 
 p,
