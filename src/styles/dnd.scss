@@ -1,0 +1,45 @@
+// Partially based on the styles used by GM Binder
+@use "./utils/typography" as type;
+@use "./utils/colors" as color;
+
+html {
+  font-family: type.$font-dnd-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: type.$font-dnd-heading;
+  margin-bottom: 10.5px;
+}
+
+h1 {
+  font-size: 30pt;
+}
+
+h2 {
+  font-size: 22pt;
+}
+
+h3 {
+  font-size: 18pt;
+  border-bottom: 1px solid;
+  padding-bottom: 4px;
+}
+
+p + p {
+  text-indent: 1rem;
+}
+
+blockquote {
+  background-color: color.$block-bg;
+  padding: 2px;
+  font-family: type.$font-dnd-sans;
+}
+
+* + blockquote {
+  margin-top: 1rem;
+}

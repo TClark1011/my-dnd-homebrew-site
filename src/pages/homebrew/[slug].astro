@@ -1,0 +1,42 @@
+---
+import RootLayout from "$/layouts/RootLayout.astro";
+import "../../styles/dnd.scss";
+import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
+import { getCollection, getEntry } from "astro:content";
+
+export const getStaticPaths = (async () => {
+  const allHomebrew = await getCollection("homebrew");
+  return allHomebrew.map((item) => ({
+    params: {
+      slug: item.slug,
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params as InferGetStaticParamsType<
+  typeof getStaticPaths
+>;
+
+const entry = await getEntry("homebrew", slug);
+
+const { Content } = await entry.render();
+---
+
+<RootLayout>
+  <div class="container">
+    <Content />
+  </div>
+</RootLayout>
+
+<style lang="scss">
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+    padding: 0 1rem;
+  }
+</style>
