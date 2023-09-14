@@ -1,6 +1,10 @@
 {
-	"extends": "node_modules/astro/tsconfigs/strictest",
+	"extends": "./node_modules/astro/tsconfigs/strictest.json",
 	"compilerOptions": {
-		"types": ["bun-types"]
+		"types": ["bun-types"],
+		"baseUrl": ".",
+		"paths": {
+			"$/*": ["./src/*"]
+		}
 	}
 }
