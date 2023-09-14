@@ -1,21 +1,22 @@
 {
-	"name": "my-dnd-homebrew-site",
-	"type": "module",
-	"version": "0.0.1",
-	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro",
-		"prettier": "prettier --write src/**/*"
-	},
-	"dependencies": {
-		"astro": "^3.0.13"
-	},
-	"devDependencies": {
-		"bun-types": "^1.0.1",
-		"prettier": "3.0.3",
-		"prettier-plugin-astro": "^0.12.0"
-	}
+  "name": "my-dnd-homebrew-site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "prettier": "prettier --write src/**/*"
+  },
+  "dependencies": {
+    "astro": "^3.0.13",
+    "sass": "^1.67.0"
+  },
+  "devDependencies": {
+    "bun-types": "^1.0.1",
+    "prettier": "3.0.3",
+    "prettier-plugin-astro": "^0.12.0"
+  }
 }
