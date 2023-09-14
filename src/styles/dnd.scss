@@ -2,10 +2,10 @@
 @use "./utils/theme" as theme;
 
 html {
-  @include theme.applyTheme(theme.$ua-dark);
+  @include theme.applyTheme(theme.$ua-light);
 
-  @media (prefers-color-scheme: light) {
-    @include theme.applyTheme(theme.$ua-light);
+  @media (prefers-color-scheme: dark) {
+    @include theme.applyTheme(theme.$ua-dark);
   }
 
   font-family: theme.$font-dnd-body;
