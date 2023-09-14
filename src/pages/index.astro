@@ -1,28 +1,26 @@
 ---
 import RootLayout from "$/layouts/RootLayout.astro";
+import { getCollection } from "astro:content";
+
+const allHomebrew = await getCollection(
+  "homebrew",
+  (item) => !item.data.hidden,
+);
 ---
 
 <RootLayout>
-  <p>
-    Tempor quam in torquent consequat aptent dictumst ipsum maximus orci
-    efficitur volutpat molestie etiam vestibulum himenaeos, tincidunt
-    condimentum sagittis a commodo donec nunc posuere blandit viverra varius
-    elit euismod cubilia. Tristique enim imperdiet aliquet quis et in facilisis
-    orci, mus dignissim malesuada rutrum dictumst quam ullamcorper, scelerisque
-    per maecenas lobortis fusce ex iaculis.
-  </p>
-  <p>
-    In congue aptent sed elit fusce phasellus mattis dapibus nam a commodo arcu
-    augue litora, senectus lorem consequat ad pellentesque lectus himenaeos nec
-    magnis ultrices inceptos mollis. Molestie lacinia fusce ante lacus quis
-    vehicula venenatis dis sollicitudin consequat velit varius vestibulum, sem
-    iaculis dolor turpis commodo aptent convallis a orci nascetur gravida
-    ultricies.
-  </p>
+  <div class="landing">
+    {
+      allHomebrew.map((item) => (
+        <a href={`/homebrew/${item.slug}`}>{item.data.title}</a>
+      ))
+    }
+  </div>
 </RootLayout>
 
 <style lang="scss">
-  p {
-    font-family: "Bookinsanity";
+  .landing {
+    height: 100vh;
+    width: 100%;
   }
 </style>
