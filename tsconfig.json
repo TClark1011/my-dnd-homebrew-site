@@ -1,0 +1,6 @@
+{
+	"extends": "node_modules/astro/tsconfigs/strictest",
+	"compilerOptions": {
+		"types": ["bun-types"]
+	}
+}
