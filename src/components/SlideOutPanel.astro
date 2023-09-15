@@ -25,11 +25,7 @@ const { class: className, closeOnClickSelector } = Astro.props;
   });
 
   const closeOnClickSelector = panel?.dataset?.closeonclickselector;
-  console.log("(SlideOutPanel): ", { closeOnClickSelector });
   if (closeOnClickSelector) {
-    const elementsToTriggerCloseOnClick =
-      panel?.querySelectorAll(closeOnClickSelector);
-    console.log("(SlideOutPanel): ", { elementsToTriggerCloseOnClick });
     panel?.querySelectorAll(closeOnClickSelector).forEach((element) => {
       element.addEventListener("click", () => {
         isOpenAtom.set(false);
@@ -38,7 +34,6 @@ const { class: className, closeOnClickSelector } = Astro.props;
   }
 
   button?.addEventListener("click", (event) => {
-    console.log("Hi!!!!");
     event.stopPropagation();
     isOpenAtom.set(!isOpenAtom.get());
   });

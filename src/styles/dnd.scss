@@ -89,13 +89,17 @@ table {
     background-color: theme.$color-table-odd-row-bg;
   }
 
+  td,
+  th {
+    padding: theme.$space-table-cell-padding;
+  }
+
   th {
     font-weight: bold;
   }
 
-  td,
-  th {
-    padding: theme.$space-table-cell-padding;
+  &.shrink td {
+    font-size: 0.8em;
   }
 }
 

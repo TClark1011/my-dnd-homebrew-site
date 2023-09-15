@@ -23,6 +23,18 @@ const entry = await getEntry("homebrew", slug);
 const { Content, headings } = await entry.render();
 ---
 
+<script>
+  import { elementIsTooWideForScreen } from "$/utils";
+
+  const tables = document.querySelectorAll("table");
+
+  tables.forEach((table) => {
+    if (elementIsTooWideForScreen(table, 16)) {
+      table.classList.add("shrink");
+    }
+  });
+</script>
+
 <RootLayout>
   <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
     <ol class="toc">
@@ -101,7 +113,7 @@ const { Content, headings } = await entry.render();
     .container {
       width: 100%;
       max-width: 800px;
-      padding: 1rem;
+      padding: 16px;
       padding-top: 3rem;
     }
   </style>
