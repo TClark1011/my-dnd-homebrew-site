@@ -8,7 +8,7 @@ html {
     @include theme.applyTheme(theme.$ua-dark);
   }
 
-  font-family: theme.$font-dnd-body;
+  font-family: theme.$font-body;
   background-color: theme.$color-bg;
   color: theme.$color-text;
 }
@@ -19,67 +19,69 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: theme.$font-dnd-heading;
-  margin-bottom: 0.2em;
+  font-family: theme.$font-heading;
+  margin-bottom: theme.$space-headings-margin-bottom;
 }
 
 h1 {
-  font-size: 30pt;
+  font-size: theme.$font-h1-size;
 }
 
 h2 {
-  font-size: 22pt;
+  font-size: theme.$font-h2-size;
 }
 
 h3 {
-  font-size: 18pt;
+  font-size: theme.$font-h3-size;
   border-bottom: 1px solid;
   padding-bottom: 4px;
 }
 
 h4 {
-  font-size: 14.9pt;
+  font-size: theme.$font-h4-size;
 }
 
 h5 {
-  font-size: 12pt;
+  font-size: theme.$font-h5-size;
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: theme.$font-h6-size;
 }
 
 p,
 blockquote {
-  line-height: 1.25rem;
+  line-height: theme.$space-body-line-height;
 }
 
 p {
-  --paragraph-first-line-indent: 1rem;
-  *:not(p) + & > strong:first-child {
-    // If a paragraph would not normally have its first line indented, but
-    // it starts with bold text, we indent it anyway
-    margin-left: var(--paragraph-first-line-indent);
-  }
-
+  // If we have multiple paragraphs in a row, we want indent the first line
+  // of each paragraph after the first
   & + p {
-    text-indent: var(--paragraph-first-line-indent);
+    text-indent: theme.$space-indent;
   }
 
   & + *:not(p) {
-    margin-top: 10.5px;
+    // Put space between paragraphs and other elements
+    margin-top: theme.$space-paragraph-element-gap;
   }
+}
+
+*:not(p) + p > strong:first-child {
+  // If a paragraph would not normally have its first line indented, but
+  // it starts with bold text, we indent it anyway
+  margin-left: theme.$space-indent;
 }
 
 blockquote {
   background-color: theme.$color-block-bg;
-  padding: 2px;
-  font-family: theme.$font-dnd-sans;
+  padding: theme.$space-block-padding;
+  font-family: theme.$font-sans;
 }
 
 table {
   width: 100%;
-  font-family: theme.$font-dnd-sans;
+  font-family: theme.$font-sans;
   border-collapse: collapse;
 
   tbody tr:nth-child(odd) {
@@ -92,13 +94,14 @@ table {
 
   td,
   th {
-    padding: 0.2rem;
+    padding: theme.$space-table-cell-padding;
   }
 }
 
-* + blockquote,
-* + table,
-blockquote + *,
-table + * {
-  margin-top: 1rem;
+blockquote,
+table {
+  *:not(&) + &,
+  & + *:not(&) {
+    margin-top: theme.$space-special-element-gap;
+  }
 }

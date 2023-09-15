@@ -1,0 +1,8 @@
+@mixin target-selector-and-children($selector) {
+  #{$selector} {
+    &,
+    * {
+      @content;
+    }
+  }
+}

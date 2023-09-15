@@ -1,9 +1,14 @@
+@use "./utils/mixins" as mixins;
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
   font-size: 1rem;
   font-weight: normal;
+  font-style: normal;
+
   background: none;
   border: none;
   list-style: none;
@@ -13,9 +18,10 @@ body {
   min-height: 100vh;
 }
 
-strong {
-  &,
-  * {
-    font-weight: bold;
-  }
+@include mixins.target-selector-and-children("strong, bold") {
+  font-weight: bold;
+}
+
+@include mixins.target-selector-and-children("em, i") {
+  font-style: italic;
 }
