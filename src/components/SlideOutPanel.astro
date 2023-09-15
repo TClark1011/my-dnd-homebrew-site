@@ -132,6 +132,10 @@ const { class: className, closeOnClickSelector } = Astro.props;
     top: 36px;
     right: -$button-size;
 
+    @include mixins.mobile {
+      top: 8px;
+    }
+
     $padding: 4px;
     padding: $padding;
     @include mixins.size($button-size);
