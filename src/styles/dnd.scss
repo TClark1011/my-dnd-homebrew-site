@@ -50,7 +50,8 @@ h6 {
 }
 
 p,
-blockquote {
+blockquote,
+li {
   line-height: theme.$space-body-line-height;
 }
 
@@ -104,4 +105,11 @@ table {
   & + *:not(&) {
     margin-top: theme.$space-special-element-gap;
   }
+}
+
+#credits + * a {
+  // Make sure links within the credits section stand out
+  font-weight: bold;
+  text-decoration: underline;
+  font-style: italic;
 }

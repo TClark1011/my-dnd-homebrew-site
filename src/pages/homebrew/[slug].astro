@@ -27,11 +27,16 @@ const { Content, headings } = await entry.render();
   <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
     <ol class="toc">
       {
-        headings.map((heading) => (
-          <li style={`--depth: ${heading.depth}`} data-depth={heading.depth}>
-            <a href={`#${heading.slug}`}>{heading.text}</a>
-          </li>
-        ))
+        headings
+          .filter((heading) => heading.depth > 1)
+          .map((heading) => (
+            <li
+              style={`--depth: ${heading.depth - 1}`}
+              data-depth={heading.depth - 1}
+            >
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))
       }
     </ol>
   </SlideOutPanel>
