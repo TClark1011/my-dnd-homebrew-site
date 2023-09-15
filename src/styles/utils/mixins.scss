@@ -6,3 +6,8 @@
     }
   }
 }
+
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}

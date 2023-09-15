@@ -3,6 +3,7 @@ import RootLayout from "$/layouts/RootLayout.astro";
 import "../../styles/dnd.scss";
 import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
 import { getCollection, getEntry } from "astro:content";
+import SlideOutPanel from "$/components/SlideOutPanel.astro";
 
 export const getStaticPaths = (async () => {
   const allHomebrew = await getCollection("homebrew");
@@ -19,24 +20,84 @@ const { slug } = Astro.params as InferGetStaticParamsType<
 
 const entry = await getEntry("homebrew", slug);
 
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 ---
 
 <RootLayout>
+  <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
+    <ol class="toc">
+      {
+        headings.map((heading) => (
+          <li style={`--depth: ${heading.depth}`} data-depth={heading.depth}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))
+      }
+    </ol>
+  </SlideOutPanel>
+
   <div class="container">
     <Content />
   </div>
+
+  <style lang="scss">
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .panel {
+      padding: 16px;
+
+      $number-offset: 8px;
+
+      .toc {
+        display: flex;
+        flex-direction: column;
+
+        gap: 1rem;
+        li {
+          &[data-depth="1"] {
+            counter-increment: headings;
+            &::before {
+              content: counter(headings) ". ";
+              font-weight: bold;
+              margin-right: $number-offset;
+            }
+          }
+
+          * {
+            font-style: italic;
+          }
+
+          &:not([data-depth="1"]) {
+            --heading-offset: calc(#{$number-offset} + 1rem);
+
+            * {
+              font-style: italic;
+            }
+          }
+
+          display: flex;
+
+          list-style-type: none;
+          margin-left: calc(
+            calc(calc(var(--depth) - 1) * 1rem) + var(--heading-offset)
+          );
+
+          a {
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      padding: 1rem;
+      padding-top: 3rem;
+    }
+  </style>
 </RootLayout>
-
-<style lang="scss">
-  body {
-    display: flex;
-    justify-content: center;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 800px;
-    padding: 1rem;
-  }
-</style>

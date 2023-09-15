@@ -1,0 +1,142 @@
+---
+type Props = {
+  class?: string;
+  closeOnClickSelector?: string;
+};
+
+const { class: className, closeOnClickSelector } = Astro.props;
+---
+
+<script>
+  import { atom } from "nanostores";
+
+  const panelBackdrop = document.getElementById("panel-backdrop");
+  const panel = document.getElementById("panel");
+  const button = document.getElementById("slide-out-toggle");
+
+  const isOpenAtom = atom(false);
+
+  isOpenAtom.listen((isOpen) => {
+    if (isOpen) {
+      panelBackdrop?.classList.add("open");
+    } else {
+      panelBackdrop?.classList.remove("open");
+    }
+  });
+
+  const closeOnClickSelector = panel?.dataset?.closeonclickselector;
+  console.log("(SlideOutPanel): ", { closeOnClickSelector });
+  if (closeOnClickSelector) {
+    const elementsToTriggerCloseOnClick =
+      panel?.querySelectorAll(closeOnClickSelector);
+    console.log("(SlideOutPanel): ", { elementsToTriggerCloseOnClick });
+    panel?.querySelectorAll(closeOnClickSelector).forEach((element) => {
+      element.addEventListener("click", () => {
+        isOpenAtom.set(false);
+      });
+    });
+  }
+
+  button?.addEventListener("click", (event) => {
+    console.log("Hi!!!!");
+    event.stopPropagation();
+    isOpenAtom.set(!isOpenAtom.get());
+  });
+
+  panelBackdrop?.addEventListener("click", () => {
+    isOpenAtom.set(false);
+  });
+
+  panel?.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+</script>
+
+<div id="panel-backdrop"></div>
+<div
+  id="panel"
+  data-closeonclickselector={closeOnClickSelector}
+  class={className}
+>
+  <slot />
+  <button id="slide-out-toggle" aria-label="Toggle slide-out panel">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="ionicon"
+      viewBox="0 0 512 512"
+      fill="currentColor"
+    >
+      <path
+        d="M64 384h384v-42.67H64zm0-106.67h384v-42.66H64zM64 128v42.67h384V128z"
+      >
+      </path>
+    </svg>
+  </button>
+</div>
+
+<style lang="scss">
+  @use "$/styles/utils/theme" as theme;
+  @use "$/styles/utils/mixins" as mixins;
+
+  $transition-duration: 0.3s;
+  $button-size: 36px;
+
+  #panel-backdrop {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    --opacity: 0;
+    background-color: rgba(0, 0, 0, var(--opacity));
+
+    transition: background-color $transition-duration ease-in-out;
+
+    &.open {
+      pointer-events: auto;
+      --opacity: 0.6;
+    }
+  }
+
+  #panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 300px;
+    height: 100%;
+    background-color: theme.$color-block-bg;
+    transform: translateX(-100%);
+
+    transition: transform $transition-duration ease-in-out;
+
+    .open + & {
+      transform: translateX(0);
+    }
+  }
+
+  #slide-out-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    $radius: 4px;
+    border-bottom-right-radius: $radius;
+    border-top-right-radius: $radius;
+
+    position: absolute;
+    top: 36px;
+    right: -$button-size;
+
+    $padding: 4px;
+    padding: $padding;
+    @include mixins.size($button-size);
+
+    color: theme.$color-text;
+    background-color: theme.$color-block-bg;
+  }
+</style>

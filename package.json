@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "astro": "^3.0.13",
+    "nanostores": "^0.9.3",
     "sass": "^1.67.0"
   },
   "devDependencies": {
