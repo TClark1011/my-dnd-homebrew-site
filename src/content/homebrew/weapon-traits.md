@@ -83,3 +83,38 @@ _**Slow.** (melee only)_ When making an attack of opportunity with a slow weapon
 _**Unsubtle.** (ranged only)_ Weapons with the unsubtle property do not have advantage on attack rolls for attacks made while hidden.
 
 **_Whiplash._** After scoring a critical hit with a weapon with the whiplash property, your next attack with the weapon will not have your proficiency modifier applied to the attack roll.
+
+## Integrating Traits into your game
+
+There are two main ways to integrate weapon traits into your game. The first is to allow players to start with irregular weapons, and the second is to have monsters carry irregular weapons that the player characters can then loot.
+
+### At Character Creation
+
+Have your players determine their starting gear as normal. Any characters that use weapons regularly can pick a single weapon that they are starting with, they roll for traits on that weapon and then decide if they want to use the newly generated irregular weapon, or stick with the standard version.
+
+If you are starting your adventure past level 1 and want to simulate the likelihood that characters would have already acquired multiple irregular weapons, the DM can pick out some weapons from the equipment weapons (or have the players pick some weapons they would like) and roll for traits on each of them and allow the player to start with some or all of them.
+
+### As Equipment for Monsters
+
+At the start of an encounter, think about what you want the odds to be for the party's opponents to be carrying any irregular weapons. Once you have decided on a rough figure you can simply roll some dice, subtract a number and the result, if it is greater than 0, is the number of irregular weapons being carried by the party's enemies.
+
+Below is a table showing the probability that an encounter will contain at least 1 irregular weapon based on the dice pool that is rolled and how much is subtracted.
+
+| Dice Pool |   -5   |   -6   |   -7   |   -8   |   -9   |  -10   |  -11  |
+| :-------: | :----: | :----: | :----: | :----: | :----: | :----: | :---: |
+|    d6     | 16.67% |        |        |        |        |        |       |
+|    d8     | 37.5%  |  25%   | 12.5%  |        |        |        |       |
+|    d10    |  50%   |  40%   |  30%   |  20%   |  10%   |        |       |
+|    d12    | 58.33% |  50%   | 41.67% | 33.33% |  25%   | 16.67% | 8.33% |
+|    2d6    | 72.22% | 58.33% | 41.67% | 27.78% | 16.67% | 8.33%  | 2.78% |
+
+When rolling for the presence of irregular weapons, it may seem logical to assume that "higher tier" enemies are more likely to carry an irregular weapon than common grunts, however this is not necessarily the case. An irregular weapon is not inherently better than it's base form, and in fact it's very possible for these weapons to end up being overall weaker. For this reason, it's entirely feasible that a simple CR 1/4 goblin is carrying a scimitar with the _escaping_ and _whiplash_ traits, while the CR 1 goblin boss carries no irregular weapons.
+
+It is good practice to decide how to distribute irregular weapons between monsters after rolling the traits for all the traits have been rolled for, that way if you end up with a weapon with a quality and imperfection combination that makes the weapon stronger overall, you can give that one to the more powerful enemies.
+
+**_INCLUDE AN EXAMPLE OF DOING THIS FOR AN ENCOUNTER_**
+
+## Credits
+
+- [u/beardify](https://www.reddit.com/user/beardify/) for inspiring this system with his [Extra Weapon Properties](https://www.reddit.com/r/UnearthedArcana/comments/n6cbwx/new_weapon_properties_mechanics_that_disarm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) homebrew
+- Personal friends for giving me ideas and editing notes
