@@ -21,6 +21,13 @@ const { slug } = Astro.params as InferGetStaticParamsType<
 const entry = await getEntry("homebrew", slug);
 
 const { Content, headings } = await entry.render();
+
+const tableOfContentHeadings = headings
+  .filter((heading) => heading.depth > 1)
+  .map((heading) => ({
+    ...heading,
+    depth: heading.depth - 1,
+  }));
 ---
 
 <script>
@@ -36,23 +43,21 @@ const { Content, headings } = await entry.render();
 </script>
 
 <RootLayout>
-  <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
-    <ol class="toc">
-      {
-        headings
-          .filter((heading) => heading.depth > 1)
-          .map((heading) => (
-            <li
-              style={`--depth: ${heading.depth - 1}`}
-              data-depth={heading.depth - 1}
-            >
+  {
+    tableOfContentHeadings.length > 0 && (
+      <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
+        (
+        <ol class="toc">
+          {tableOfContentHeadings.map((heading) => (
+            <li style={`--depth: ${heading.depth}`} data-depth={heading.depth}>
               <a href={`#${heading.slug}`}>{heading.text}</a>
             </li>
-          ))
-      }
-    </ol>
-  </SlideOutPanel>
-
+          ))}
+        </ol>
+        )
+      </SlideOutPanel>
+    )
+  }
   <div class="container">
     <Content />
   </div>
