@@ -21,6 +21,14 @@ h5,
 h6 {
   font-family: theme.$font-heading;
   margin-bottom: theme.$space-headings-margin-bottom;
+
+  & + p > em:only-child {
+    // Sometimes we have italics directly after a heading as a subtitle,
+    // on which case we want to add some space between it and the body
+    // text
+    display: block;
+    padding-bottom: theme.$space-paragraph-element-gap;
+  }
 }
 
 h1 {
