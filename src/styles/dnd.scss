@@ -13,87 +13,142 @@ html {
   color: theme.$color-text;
 }
 
-.dnd :where(*) {
-  font-family: theme.$font-dnd-body;
-}
-
-h3 {
-  border-bottom: 1px solid;
-  padding-bottom: 4px;
-}
-
-p {
-  // If we have multiple paragraphs in a row, we want indent the first line
-  // of each paragraph after the first
-  & + p {
-    text-indent: theme.$space-indent;
+.dnd {
+  * {
+    font-family: theme.$font-dnd-body;
   }
 
-  & + *:not(p) {
-    // Put space between paragraphs and other elements
-    margin-top: theme.$space-paragraph-element-gap;
-  }
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: theme.$font-dnd-heading;
+    margin-bottom: theme.$space-headings-margin-bottom;
+    color: theme.$color-text-heading;
 
-*:not(p) + p > strong:first-child {
-  // If a paragraph would not normally have its first line indented, but
-  // it starts with bold text, we indent it anyway
-  margin-left: theme.$space-indent;
-}
+    @at-root h1 {
+      font-size: theme.$font-h1-size;
+    }
 
-blockquote,
-table {
-  *:not(&) + &,
-  & + *:not(&) {
-    // Add a margin top to a non blockquote/table that come after a table,
-    // as well as a blockquote/table that come after a non blockquote/table
-    margin-top: theme.$space-special-element-gap;
-  }
-}
+    @at-root h2 {
+      font-size: theme.$font-h2-size;
+    }
 
-blockquote {
-  background-color: theme.$color-surface-bg;
-  padding: theme.$space-block-padding;
-  font-family: theme.$font-sans;
-}
+    @at-root h3 {
+      font-size: theme.$font-h3-size;
+      border-bottom: 1px solid;
+      padding-bottom: 4px;
+    }
 
-table {
-  width: 100%;
-  font-family: theme.$font-sans;
-  border-collapse: collapse;
+    @at-root h4 {
+      font-size: theme.$font-h4-size;
+    }
 
-  tbody tr:nth-child(odd) {
-    background-color: theme.$color-table-odd-row-bg;
-  }
+    @at-root h5 {
+      font-size: theme.$font-h5-size;
+    }
 
-  td,
-  th {
-    padding: theme.$space-table-cell-padding;
+    @at-root h6 {
+      font-size: theme.$font-h6-size;
+    }
   }
 
-  th {
+  p,
+  blockquote,
+  ul,
+  ol,
+  dl,
+  table {
+    margin-bottom: theme.$space-between-elements;
+
+    & > p:only-child {
+      // Prevent p tags inside elements from creating a "padding"
+      // effect with the margin-bottom
+      margin-bottom: 0;
+    }
+  }
+
+  p,
+  blockquote,
+  li {
+    line-height: theme.$space-body-line-height;
+  }
+
+  p {
+    // If we have multiple paragraphs in a row, we want indent the first line
+    // of each paragraph after the first
+    & + p {
+      text-indent: theme.$space-indent;
+    }
+
+    & + *:not(p) {
+      // Put space between paragraphs and other elements
+      margin-top: theme.$space-paragraph-element-gap;
+    }
+  }
+
+  *:not(p) + p > strong:first-child {
+    // If a paragraph would not normally have its first line indented, but
+    // it starts with bold text, we indent it anyway
+    margin-left: theme.$space-indent;
+  }
+
+  blockquote,
+  table {
+    *:not(&) + &,
+    & + *:not(&) {
+      // Add a margin top to a non blockquote/table that come after a table,
+      // as well as a blockquote/table that come after a non blockquote/table
+      margin-top: theme.$space-special-element-gap;
+    }
+  }
+
+  blockquote {
+    background-color: theme.$color-block-bg;
+    padding: theme.$space-block-padding;
+    font-family: theme.$font-sans;
+  }
+
+  table {
+    width: 100%;
+    font-family: theme.$font-sans;
+    border-collapse: collapse;
+
+    tbody tr:nth-child(odd) {
+      background-color: theme.$color-table-odd-row-bg;
+    }
+
+    td,
+    th {
+      padding: theme.$space-table-cell-padding;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    &.shrink :is(th, td) {
+      font-size: 0.8em;
+    }
+  }
+
+  #credits ~ * a {
+    // Make sure links within the credits section stand out
     font-weight: bold;
+    text-decoration: underline;
+    font-style: italic;
   }
 
-  &.shrink :is(th, td) {
-    font-size: 0.8em;
-  }
-}
-
-#credits ~ * a {
-  // Make sure links within the credits section stand out
-  font-weight: bold;
-  text-decoration: underline;
-  font-style: italic;
-}
-
-// Special Headings
-h1 {
-  &#hidden {
-    &,
-    ~ * {
-      // Hide content under any headings not meant to be shown to the user
-      display: none;
+  // Special Headings
+  h1 {
+    &#hidden {
+      &,
+      ~ * {
+        // Hide content under any headings not meant to be shown to the user
+        display: none;
+      }
     }
   }
 }

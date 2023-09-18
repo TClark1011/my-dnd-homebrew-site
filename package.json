@@ -11,6 +11,7 @@
     "prettier": "prettier --write src/**/*"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.0.8",
     "@nanostores/persistent": "^0.9.1",
     "astro": "^3.0.13",
     "nanostores": "^0.9.3",

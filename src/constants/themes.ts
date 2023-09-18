@@ -12,4 +12,12 @@ export const THEMES: ThemeEntry[] = [
     id: "ua-dark",
     label: "Unearthed Arcana (Dark)",
   },
+  {
+    id: "5e-tools-light",
+    label: "5eTools (Light)",
+  },
+  {
+    id: "5e-tools-dark",
+    label: "5eTools (Dark)",
+  },
 ];

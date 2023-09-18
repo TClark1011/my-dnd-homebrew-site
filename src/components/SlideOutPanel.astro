@@ -75,6 +75,7 @@ const { class: className, closeOnClickSelector } = Astro.props;
 
   $transition-duration: 0.3s;
   $button-size: 36px;
+  $panel-bg: theme.$color-surface-bg;
 
   #panel-backdrop {
     position: fixed;
@@ -104,7 +105,7 @@ const { class: className, closeOnClickSelector } = Astro.props;
     width: 100%;
     max-width: 300px;
     height: 100%;
-    background-color: theme.$color-surface-bg;
+    background-color: $panel-bg;
     transform: translateX(-100%);
 
     transition: transform $transition-duration ease-in-out;
@@ -136,6 +137,6 @@ const { class: className, closeOnClickSelector } = Astro.props;
     @include mixins.size($button-size);
 
     color: theme.$color-text;
-    background-color: theme.$color-surface-bg;
+    background-color: $panel-bg;
   }
 </style>

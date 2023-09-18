@@ -3,6 +3,8 @@
 $themes-map: (
   "ua-light": theme.$ua-light,
   "ua-dark": theme.$ua-dark,
+  "5e-tools-light": theme.$five-e-tools-light,
+  "5e-tools-dark": theme.$five-e-tools-dark,
 );
 
 @mixin set-theme-css-vars-from-data-theme-attribute() {
@@ -27,45 +29,4 @@ html {
 
 * {
   color: theme.$color-text;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: theme.$font-heading;
-  margin-bottom: theme.$space-headings-margin-bottom;
-  color: theme.$color-text-heading;
-
-  @at-root h1 {
-    font-size: theme.$font-h1-size;
-  }
-
-  @at-root h2 {
-    font-size: theme.$font-h2-size;
-  }
-
-  @at-root h3 {
-    font-size: theme.$font-h3-size;
-  }
-
-  @at-root h4 {
-    font-size: theme.$font-h4-size;
-  }
-
-  @at-root h5 {
-    font-size: theme.$font-h5-size;
-  }
-
-  @at-root h6 {
-    font-size: theme.$font-h6-size;
-  }
-}
-
-p,
-blockquote,
-li {
-  line-height: theme.$space-body-line-height;
 }
