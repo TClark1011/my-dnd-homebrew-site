@@ -16,11 +16,16 @@ $themes-map: (
 }
 
 html {
-  @include theme.applyTheme(theme.$ua-light);
+  &:not([data-theme]) {
+    @include theme.applyTheme(theme.$ua-light);
+    @media (prefers-color-scheme: dark) {
+      @include theme.applyTheme(theme.$ua-dark);
+    }
+  }
+
   @include set-theme-css-vars-from-data-theme-attribute();
 
   @media (prefers-color-scheme: dark) {
-    @include theme.applyTheme(theme.$ua-dark);
     @include set-theme-css-vars-from-data-theme-attribute();
   }
 

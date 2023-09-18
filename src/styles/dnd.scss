@@ -2,12 +2,6 @@
 @use "./utils/theme" as theme;
 
 html {
-  @include theme.applyTheme(theme.$ua-light);
-
-  @media (prefers-color-scheme: dark) {
-    @include theme.applyTheme(theme.$ua-dark);
-  }
-
   font-family: theme.$font-dnd-body;
   background-color: theme.$color-bg;
   color: theme.$color-text;
@@ -97,6 +91,11 @@ html {
 
   blockquote,
   table {
+    &,
+    & > p,
+    & :is(th, td) {
+      font-family: theme.$font-sans;
+    }
     *:not(&) + &,
     & + *:not(&) {
       // Add a margin top to a non blockquote/table that come after a table,
@@ -108,12 +107,10 @@ html {
   blockquote {
     background-color: theme.$color-block-bg;
     padding: theme.$space-block-padding;
-    font-family: theme.$font-sans;
   }
 
   table {
     width: 100%;
-    font-family: theme.$font-sans;
     border-collapse: collapse;
 
     tbody tr:nth-child(odd) {

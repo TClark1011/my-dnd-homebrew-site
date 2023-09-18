@@ -51,7 +51,10 @@ $space-between-elements: var($var__space-between-elements, 0);
 @mixin applyTheme($theme) {
   #{$var__font-dnd-body}: #{map-get($theme, "font-dnd-body")};
   #{$var__font-dnd-heading}: #{map-get($theme, "font-dnd-heading")};
-  #{$var__font-sans}: #{map-get($theme, "font-sans")};
+
+  @if map-has-key($theme, "font-sans") {
+    #{$var__font-sans}: #{map-get($theme, "font-sans")};
+  }
 
   #{$var__font-h1-size}: #{map-get($theme, "font-h1-size")};
   #{$var__font-h2-size}: #{map-get($theme, "font-h2-size")};
@@ -146,7 +149,7 @@ $ua-dark: map-merge(
 );
 
 $theme-fragment-five-e-tools-base: map-merge(
-  $theme-fragment_ua-base,
+  map-remove($theme-fragment_ua-base, "font-sans"),
   (
     "font-dnd-body": "Roboto, Helvetica, sans-serif",
     "space-indent": 0,
