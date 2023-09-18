@@ -26,7 +26,7 @@ $var__color-block-bg: --color-block-bg;
 $var__color-table-odd-row-bg: --color-table-odd-row-bg;
 $color-bg: var($var__color-bg);
 $color-text: var($var__color-text);
-$color-text-heading: var($var__color-text-heading, auto);
+$color-text-heading: var($var__color-text-heading);
 $color-surface-bg: var($var__color-surface-bg);
 $color-block-bg: var($var__color-block-bg, $color-surface-bg);
 $color-table-odd-row-bg: var($var__color-table-odd-row-bg);
@@ -46,7 +46,7 @@ $space-special-element-gap: var($var__space-special-element-gap);
 $space-table-cell-padding: var($var__space-table-cell-padding);
 $space-block-padding: var($var__space-block-padding);
 $space-headings-margin-bottom: var($var__space-headings-margin-bottom);
-$space-between-elements: var($var__space-between-elements, 0);
+$space-between-elements: var($var__space-between-elements);
 
 @mixin applyTheme($theme) {
   #{$var__font-dnd-body}: #{map-get($theme, "font-dnd-body")};
