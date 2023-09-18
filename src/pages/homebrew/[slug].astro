@@ -1,7 +1,11 @@
 ---
 import RootLayout from "$/layouts/RootLayout.astro";
 import "../../styles/dnd.scss";
-import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
+import type {
+  GetStaticPaths,
+  InferGetStaticParamsType,
+  MarkdownHeading,
+} from "astro";
 import { getCollection, getEntry } from "astro:content";
 import SlideOutPanel from "$/components/SlideOutPanel.astro";
 
@@ -22,7 +26,19 @@ const entry = await getEntry("homebrew", slug);
 
 const { Content, headings } = await entry.render();
 
-const tableOfContentHeadings = headings
+const filterOutHiddenHeadings = (
+  headings: MarkdownHeading[],
+): MarkdownHeading[] => {
+  let isAfterHiddenHeading = false;
+  return headings.filter((heading) => {
+    if (heading.depth === 1 && heading.slug === "hidden") {
+      isAfterHiddenHeading = true;
+    }
+    return !isAfterHiddenHeading;
+  });
+};
+
+const tableOfContentHeadings = filterOutHiddenHeadings(headings)
   .filter((heading) => heading.depth > 1)
   .map((heading) => ({
     ...heading,
@@ -46,7 +62,6 @@ const tableOfContentHeadings = headings
   {
     tableOfContentHeadings.length > 0 && (
       <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
-        (
         <ol class="toc">
           {tableOfContentHeadings.map((heading) => (
             <li style={`--depth: ${heading.depth}`} data-depth={heading.depth}>
@@ -54,7 +69,6 @@ const tableOfContentHeadings = headings
             </li>
           ))}
         </ol>
-        )
       </SlideOutPanel>
     )
   }
