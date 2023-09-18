@@ -42,7 +42,7 @@ const tableOfContentHeadings = headings
   });
 </script>
 
-<RootLayout>
+<RootLayout title={entry.data.title}>
   {
     tableOfContentHeadings.length > 0 && (
       <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
