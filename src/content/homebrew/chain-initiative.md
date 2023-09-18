@@ -22,8 +22,9 @@ _**Lair Actions.**_ Lair actions occur after the first player character's turn o
 ## Todo
 
 - [x] Consider lair actions
+- [ ] Change the wording of "NPCs" when talking about how the active side changes on a failed check; Its possible the party will have an allied NPC acting on their side, and with the current wording if such an NPC failed the initiative check then the next turn would still go to the party.
 - [ ] Credits (find the video you got the idea from)
 
 ## Ideas
 
-- For players, instead of using the characters individual initiative mod, instead each player uses the average initiative mod of the party. If there is any remainder after the division it gets given to th first few characters as +1s. Eg; If a party of 3 has a combined initiative mod of + 8, the average is 6 with a remainder of 2, so the first two characters get +3 and the third gets +2.
+- For players, instead of using the characters individual initiative mod, instead each player uses the average initiative mod of the party. If there is any remainder after the division it gets given to th first few characters as +1s. Eg; If a party of 3 has a combined initiative mod of + 8, the average is 6 with a remainder of 2, so the first two characters get +3 and the third gets +2. Maybe the modifier should be minimum of 0.
