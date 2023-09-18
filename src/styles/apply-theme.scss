@@ -1,0 +1,71 @@
+@use "./utils/theme" as theme;
+
+$themes-map: (
+  "ua-light": theme.$ua-light,
+  "ua-dark": theme.$ua-dark,
+);
+
+@mixin set-theme-css-vars-from-data-theme-attribute() {
+  @each $theme-name, $theme in $themes-map {
+    &[data-theme="#{$theme-name}"] {
+      @include theme.applyTheme($theme);
+    }
+  }
+}
+
+html {
+  @include theme.applyTheme(theme.$ua-light);
+  @include set-theme-css-vars-from-data-theme-attribute();
+
+  @media (prefers-color-scheme: dark) {
+    @include theme.applyTheme(theme.$ua-dark);
+    @include set-theme-css-vars-from-data-theme-attribute();
+  }
+
+  background-color: theme.$color-bg;
+}
+
+* {
+  color: theme.$color-text;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: theme.$font-heading;
+  margin-bottom: theme.$space-headings-margin-bottom;
+  color: theme.$color-text-heading;
+
+  @at-root h1 {
+    font-size: theme.$font-h1-size;
+  }
+
+  @at-root h2 {
+    font-size: theme.$font-h2-size;
+  }
+
+  @at-root h3 {
+    font-size: theme.$font-h3-size;
+  }
+
+  @at-root h4 {
+    font-size: theme.$font-h4-size;
+  }
+
+  @at-root h5 {
+    font-size: theme.$font-h5-size;
+  }
+
+  @at-root h6 {
+    font-size: theme.$font-h6-size;
+  }
+}
+
+p,
+blockquote,
+li {
+  line-height: theme.$space-body-line-height;
+}

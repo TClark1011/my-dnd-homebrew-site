@@ -1,0 +1,52 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { THEMES } from "$/constants/themes";
+export type Props = HTMLAttributes<"select">;
+---
+
+<script>
+  import { themeAtom } from "$/stores";
+
+  const themeSelectInput =
+    document.querySelector<HTMLSelectElement>("#theme-select");
+
+  themeSelectInput?.addEventListener("change", (event) => {
+    const element = event.target as HTMLSelectElement;
+
+    if (element.value === "") {
+      themeAtom.set(undefined);
+    } else {
+      themeAtom.set(element.value);
+    }
+  });
+
+  themeAtom.listen((theme) => {
+    if (theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+  });
+
+  themeAtom.subscribe((theme) => {
+    if (theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+    if (themeSelectInput && theme) {
+      themeSelectInput.value = theme;
+    }
+  });
+</script>
+
+<select id="theme-select">
+  <option selected value="">Auto</option>
+  {THEMES.map((theme) => <option value={theme.id}>{theme.label}</option>)}
+</select>
+
+<style lang="scss">
+  select {
+    text-align: right;
+  }
+</style>

@@ -61,7 +61,7 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
 <RootLayout title={entry.data.title}>
   {
     tableOfContentHeadings.length > 0 && (
-      <SlideOutPanel class="panel" closeOnClickSelector=".toc a">
+      <SlideOutPanel class="panel dnd" closeOnClickSelector=".toc a">
         <ol class="toc">
           {tableOfContentHeadings.map((heading) => (
             <li style={`--depth: ${heading.depth}`} data-depth={heading.depth}>
@@ -72,16 +72,13 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
       </SlideOutPanel>
     )
   }
-  <div class="container">
-    <Content />
+  <div class="root">
+    <div class="container dnd">
+      <Content />
+    </div>
   </div>
 
   <style lang="scss">
-    body {
-      display: flex;
-      justify-content: center;
-    }
-
     .panel {
       padding: 16px;
 
@@ -129,10 +126,15 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
       }
     }
 
+    .root {
+      display: flex;
+      justify-content: center;
+    }
+
     .container {
       width: 100%;
       max-width: 800px;
-      padding: 16px;
+      padding: 1rem;
       padding-top: 3rem;
     }
   </style>

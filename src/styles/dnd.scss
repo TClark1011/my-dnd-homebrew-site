@@ -8,59 +8,18 @@ html {
     @include theme.applyTheme(theme.$ua-dark);
   }
 
-  font-family: theme.$font-body;
+  font-family: theme.$font-dnd-body;
   background-color: theme.$color-bg;
   color: theme.$color-text;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: theme.$font-heading;
-  margin-bottom: theme.$space-headings-margin-bottom;
-
-  & + p > em:only-child {
-    // Sometimes we have italics directly after a heading as a subtitle,
-    // on which case we want to add some space between it and the body
-    // text
-    display: block;
-    padding-bottom: theme.$space-paragraph-element-gap;
-  }
-}
-
-h1 {
-  font-size: theme.$font-h1-size;
-}
-
-h2 {
-  font-size: theme.$font-h2-size;
+.dnd :where(*) {
+  font-family: theme.$font-dnd-body;
 }
 
 h3 {
-  font-size: theme.$font-h3-size;
   border-bottom: 1px solid;
   padding-bottom: 4px;
-}
-
-h4 {
-  font-size: theme.$font-h4-size;
-}
-
-h5 {
-  font-size: theme.$font-h5-size;
-}
-
-h6 {
-  font-size: theme.$font-h6-size;
-}
-
-p,
-blockquote,
-li {
-  line-height: theme.$space-body-line-height;
 }
 
 p {
@@ -93,7 +52,7 @@ table {
 }
 
 blockquote {
-  background-color: theme.$color-block-bg;
+  background-color: theme.$color-surface-bg;
   padding: theme.$space-block-padding;
   font-family: theme.$font-sans;
 }
@@ -116,20 +75,20 @@ table {
     font-weight: bold;
   }
 
-  &.shrink td {
+  &.shrink :is(th, td) {
     font-size: 0.8em;
   }
 }
 
+#credits ~ * a {
+  // Make sure links within the credits section stand out
+  font-weight: bold;
+  text-decoration: underline;
+  font-style: italic;
+}
+
 // Special Headings
 h1 {
-  &#credits ~ * a {
-    // Make sure links within the credits section stand out
-    font-weight: bold;
-    text-decoration: underline;
-    font-style: italic;
-  }
-
   &#hidden {
     &,
     ~ * {

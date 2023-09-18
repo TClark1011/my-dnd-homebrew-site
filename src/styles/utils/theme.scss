@@ -1,7 +1,8 @@
-$var__font-body: --font-body;
+$var__font-dnd-body: --font-dnd-body;
+$var__font-ui-body: --font-ui-body;
 $var__font-heading: --font-heading;
 $var__font-sans: --font-sans;
-$font-body: var($var__font-body);
+$font-dnd-body: var($var__font-dnd-body);
 $font-heading: var($var__font-heading);
 $font-sans: var($var__font-sans);
 
@@ -20,11 +21,13 @@ $font-h6-size: var($var__font-h6-size);
 
 $var__color-bg: --color-bg;
 $var__color-text: --color-text;
-$var__color-block-bg: --color-block-bg;
+$var__color-text-heading: --color-text-heading;
+$var__color-surface-bg: --color-surface-bg;
 $var__color-table-odd-row-bg: --color-table-odd-row-bg;
 $color-bg: var($var__color-bg);
 $color-text: var($var__color-text);
-$color-block-bg: var($var__color-block-bg);
+$color-text-heading: var($var__color-text-heading, auto);
+$color-surface-bg: var($var__color-surface-bg);
 $color-table-odd-row-bg: var($var__color-table-odd-row-bg);
 
 $var__space-indent: --space-indent;
@@ -43,7 +46,7 @@ $space-block-padding: var($var__space-block-padding);
 $space-headings-margin-bottom: var($var__space-headings-margin-bottom);
 
 @mixin applyTheme($theme) {
-  #{$var__font-body}: #{map-get($theme, "font-body")};
+  #{$var__font-dnd-body}: #{map-get($theme, "font-dnd-body")};
   #{$var__font-heading}: #{map-get($theme, "font-heading")};
   #{$var__font-sans}: #{map-get($theme, "font-sans")};
 
@@ -56,7 +59,10 @@ $space-headings-margin-bottom: var($var__space-headings-margin-bottom);
 
   #{$var__color-bg}: map-get($theme, "color-bg");
   #{$var__color-text}: map-get($theme, "color-text");
-  #{$var__color-block-bg}: map-get($theme, "color-block-bg");
+  @if map-has-key($theme, "color-text-heading") {
+    #{$var__color-text-heading}: map-get($theme, "color-text-heading");
+  }
+  #{$var__color-surface-bg}: map-get($theme, "color-surface-bg");
   #{$var__color-table-odd-row-bg}: map-get($theme, "color-table-odd-row-bg");
 
   #{$var__space-indent}: #{map-get($theme, "space-indent")};
@@ -87,7 +93,7 @@ $theme-fragment_dnd-spacing: (
 );
 
 $theme-fragment_ua-typography: (
-  "font-body": "Bookinsanity, serif",
+  "font-dnd-body": "Bookinsanity, serif",
   "font-heading": "Mr Eaves, serif",
   "font-sans": "Scaly Sans, sans-serif",
   "font-h1-size": 30pt,
@@ -108,7 +114,7 @@ $ua-light: map-merge(
   (
     "color-bg": #ffffff,
     "color-text": #000000,
-    "color-block-bg": #d9d9d9,
+    "color-surface-bg": #d9d9d9,
     "color-table-odd-row-bg": #f2f2f2,
   )
 );
@@ -118,7 +124,7 @@ $ua-dark: map-merge(
   (
     "color-bg": #313339,
     "color-text": #d3d5d8,
-    "color-block-bg": #202124,
+    "color-surface-bg": #202124,
     "color-table-odd-row-bg": #27292e,
   )
 );

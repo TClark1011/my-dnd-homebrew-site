@@ -1,6 +1,6 @@
 @use "./utils/mixins" as mixins;
 
-* {
+:where(*) {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,17 +11,32 @@
 
   background: none;
   border: none;
+
+  font-family:
+    rutiger,
+    ‘Frutiger Linotype’,
+    Univers,
+    Calibri,
+    ‘Gill Sans’,
+    ‘Gill Sans MT’,
+    ‘Myriad Pro’,
+    Myriad,
+    ‘DejaVu Sans Condensed’,
+    ‘Liberation Sans’,
+    ‘Nimbus Sans L’,
+    Tahoma,
+    Geneva,
+    ‘Helvetica Neue’,
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 
-ul {
+:where(ul) {
   padding-left: 1rem;
 }
 
-body {
-  min-height: 100vh;
-}
-
-a {
+:where(a) {
   text-decoration: none;
   color: inherit;
 

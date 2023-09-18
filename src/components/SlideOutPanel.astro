@@ -104,7 +104,7 @@ const { class: className, closeOnClickSelector } = Astro.props;
     width: 100%;
     max-width: 300px;
     height: 100%;
-    background-color: theme.$color-block-bg;
+    background-color: theme.$color-surface-bg;
     transform: translateX(-100%);
 
     transition: transform $transition-duration ease-in-out;
@@ -124,11 +124,11 @@ const { class: className, closeOnClickSelector } = Astro.props;
     border-top-right-radius: $radius;
 
     position: absolute;
-    top: 36px;
+    top: 120px;
     right: -$button-size;
 
     @include mixins.mobile {
-      top: 8px;
+      top: 64px;
     }
 
     $padding: 4px;
@@ -136,6 +136,6 @@ const { class: className, closeOnClickSelector } = Astro.props;
     @include mixins.size($button-size);
 
     color: theme.$color-text;
-    background-color: theme.$color-block-bg;
+    background-color: theme.$color-surface-bg;
   }
 </style>
