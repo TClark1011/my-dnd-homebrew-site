@@ -17,11 +17,13 @@ At the conclusion of a creature's turn, if no other creatures from its side have
 
 _**Lair Actions.**_ Lair actions occur after the first player character's turn of each round.
 
-# Todo
+# Hidden
+
+## Todo
 
 - [x] Consider lair actions
 - [ ] Credits (find the video you got the idea from)
 
-# Ideas
+## Ideas
 
 - For players, instead of using the characters individual initiative mod, instead each player uses the average initiative mod of the party. If there is any remainder after the division it gets given to th first few characters as +1s. Eg; If a party of 3 has a combined initiative mod of + 8, the average is 6 with a remainder of 2, so the first two characters get +3 and the third gets +2.
