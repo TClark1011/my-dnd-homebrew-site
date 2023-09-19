@@ -23,6 +23,17 @@ const { title = "Astro" } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script src="$/scripts/subscribeToTheme"></script>
+    <script is:inline>
+      // We have to set the theme as an inline script so that the information
+      // is injected into the html tag before the page is rendered. This prevents
+      // a flash of unstyled content.
+      const theme = JSON.parse(localStorage.getItem("theme") || "undefined");
+
+      if (theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+    </script>
   </head>
   <body>
     <header class="top-bar">
@@ -31,32 +42,31 @@ const { title = "Astro" } = Astro.props;
     </header>
     <slot />
     <div class="content"></div>
+    <style lang="scss">
+      @use "$/styles/utils/theme.scss" as theme;
+
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+        .top-bar {
+          display: flex;
+          align-items: center;
+          padding: 16px;
+          justify-content: space-between;
+
+          height: 56px;
+          width: 100vw;
+
+          background-color: theme.$color-surface-bg;
+        }
+
+        .content {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    </style>
   </body>
 </html>
-
-<style lang="scss">
-  @use "$/styles/utils/theme.scss" as theme;
-
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-
-    .top-bar {
-      display: flex;
-      align-items: center;
-      padding: 16px;
-      justify-content: space-between;
-
-      height: 56px;
-      width: 100vw;
-
-      background-color: theme.$color-surface-bg;
-    }
-
-    .content {
-      width: 100%;
-      height: 100%;
-    }
-  }
-</style>

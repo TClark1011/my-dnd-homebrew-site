@@ -10,6 +10,10 @@ export type Props = HTMLAttributes<"select">;
   const themeSelectInput =
     document.querySelector<HTMLSelectElement>("#theme-select");
 
+  if (themeAtom.value && themeSelectInput) {
+    themeSelectInput.value = themeAtom.value;
+  }
+
   themeSelectInput?.addEventListener("change", (event) => {
     const element = event.target as HTMLSelectElement;
 
@@ -17,25 +21,6 @@ export type Props = HTMLAttributes<"select">;
       themeAtom.set(undefined);
     } else {
       themeAtom.set(element.value);
-    }
-  });
-
-  themeAtom.listen((theme) => {
-    if (theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-    }
-  });
-
-  themeAtom.subscribe((theme) => {
-    if (theme) {
-      document.documentElement.setAttribute("data-theme", theme);
-    } else {
-      document.documentElement.removeAttribute("data-theme");
-    }
-    if (themeSelectInput && theme) {
-      themeSelectInput.value = theme;
     }
   });
 </script>
