@@ -22,6 +22,10 @@ _**NPC Side Initiative Bonuses.**_ Sides that do not consist of player character
 
 _**Lair Actions.**_ Lair actions occur after the first player character's turn of each round.
 
+## Credits
+
+- Thumbnail Art - ["You Come To The Gnoll Camp"](https://www.artofmtg.com/art/you-come-to-the-gnoll-camp/) By [Billy Christian](https://www.deviantart.com/billcreative)
+
 # Hidden
 
 ## Todo
@@ -30,7 +34,3 @@ _**Lair Actions.**_ Lair actions occur after the first player character's turn o
 - [ ] Change the wording of "NPCs" when talking about how the active side changes on a failed check; Its possible the party will have an allied NPC acting on their side, and with the current wording if such an NPC failed the initiative check then the next turn would still go to the party.
 - [ ] Credits (find the video you got the idea from)
 - [ ] Think about a benefit to give the players if any of the characters would normally roll for initiative with advantage (e.g. Barbarian with Feral Instinct)
-
-## Ideas
-
-- For players, instead of using the characters individual initiative mod, instead each player uses the average initiative mod of the party, rounding down.
