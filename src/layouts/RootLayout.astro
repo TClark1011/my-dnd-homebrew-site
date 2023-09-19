@@ -11,9 +11,10 @@ import "@fontsource/roboto/700-italic.css";
 
 interface Props {
   title?: string;
+  ogImage?:string;
 }
 
-const { title = "Astro" } = Astro.props;
+const { title = "Astro", ogImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -23,6 +24,7 @@ const { title = "Astro" } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {ogImage && <meta property="og:image" content={ogImage} />}
     <script src="$/scripts/subscribeToTheme"></script>
     <script is:inline>
       // We have to set the theme as an inline script so that the information

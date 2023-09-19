@@ -58,7 +58,7 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
   });
 </script>
 
-<RootLayout title={entry.data.title}>
+<RootLayout title={entry.data.title} ogImage={entry.data.thumbnail}>
   {
     tableOfContentHeadings.length > 0 && (
       <SlideOutPanel class="panel dnd" closeOnClickSelector=".toc a">
