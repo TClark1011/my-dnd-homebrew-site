@@ -1,6 +1,6 @@
 ---
 title: Chain Initiative
-thumbnail: https://www.artofmtg.com/wp-content/uploads/2021/07/You-Come-to-the-Gnoll-Camp-Adventures-in-the-Forgotten-Realms-MtG-Art.jpg
+thumbnail: /og-images/gnoll-camp.jpeg
 hidden: true
 ---
 
