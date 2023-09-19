@@ -58,7 +58,7 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
   });
 </script>
 
-<RootLayout title={entry.data.title} ogImage={entry.data.thumbnail}>
+<RootLayout title={entry.data.title} ogImage={entry.data.banner}>
   {
     tableOfContentHeadings.length > 0 && (
       <SlideOutPanel class="panel dnd" closeOnClickSelector=".toc a">
@@ -72,13 +72,19 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
       </SlideOutPanel>
     )
   }
+  {entry.data.banner && <img class="banner-img" src={entry.data.banner} />}
   <div class="root">
     <div class="container dnd">
       <Content />
     </div>
   </div>
 
-  <style lang="scss">
+  <style
+    lang="scss"
+    define:vars={{
+      bannerYPosition: entry.data.bannerYPosition,
+    }}
+  >
     .panel {
       padding: 16px;
 
@@ -126,16 +132,32 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
       }
     }
 
+    .banner-img {
+      width: 100%;
+      -webkit-mask: url("https://i.imgur.com/zWuWN8O.png"),
+        url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDRUPDw8VFRUVFRUVFRUVFRUVFRUVFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NFQ0NFSsZFR0rKy0tKysrKystKy0tLSsrNy03KystLSsrKy0tKzctKy0tKy0rLS0rKy0rLS0rKysrK//AABEIAMQBAQMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAAAQIH/8QAJRABAAIBAgUEAwAAAAAAAAAAAAHwETGhIUGRsdECUWHhcYHB/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAVEQEBAAAAAAAAAAAAAAAAAAAAIf/aAAwDAQACEQMRAD8A7gAgl/KiACgCXVUugHRS8kuoF4gAAAF9wFLoX3LqAACAKAhdVBLqqXQAvAFAAAAAx8icAFAAAAAAABFAAABFARQAvJFAS2FAAABLot0AAAAAAAAAMgKACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH7AAAAAAAABQAAAAAARQAAAAAAAAAAAAABAAAAAAUAAAAAAEUAQBUAAAAABRAUQBQAAAAAABAAAMgAAAAoAAACCoCoACoAAIAAACgAACgAAAAAAAAACAAAAoAAAAACKIAoAgqIAqAqKiioogigoAAAAAAACGQwFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQFRAEAAAAAAAAUAAAAAlAAAAUAAAAAAABAAAADAAAAAAAAoAAAAAACIKJkBRDIKIAoCgAAAAAIAAAAomFBBAFEBQAAEBRAFBAATKCiEAsjOVBRMqCiKoCAKIoCoAogIogCDWYBUAAELdgVC28gAJJkAygC5EMgAZBJORMHqQCJI1MAoQYUFymQFEAUIIvUALehbsCiW3mtt5AAAvEZ4e4It2S7AKs634QAL3L2QEX7RAVS9vIACALKABBOoAHqACVQBZEAWDwAI15QBYu5F2AQi7F2+wFW/wu+ABrACo/9k=");
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-mode: alpha;
+      -webkit-mask-size:
+        100% 800px,
+        100vw 100vh;
+      -webkit-mask-position:
+        0px 220px,
+        0px -700px;
+      height: 400px;
+      object-fit: cover;
+      object-position: 50% var(--bannerYPosition, 50%);
+    }
     .root {
       display: flex;
       justify-content: center;
-    }
 
-    .container {
-      width: 100%;
-      max-width: 800px;
-      padding: 1rem;
-      padding-top: 3rem;
+      .container {
+        width: 100%;
+        max-width: 800px;
+        padding: 1rem;
+        padding-top: 3rem;
+      }
     }
   </style>
 </RootLayout>

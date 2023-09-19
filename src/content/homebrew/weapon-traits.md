@@ -1,5 +1,7 @@
 ---
 title: Weapon Traits
+banner: /images/choose-your-weapon.png
+bannerYPosition: 90%
 ---
 
 # Weapon Traits
@@ -116,5 +118,6 @@ It is good practice to decide how to distribute irregular weapons between monste
 
 ## Credits
 
+- Thumbnail Art - ["Choose Your Weapon"](https://www.artofmtg.com/art/choose-your-weapon/) by [Olivier Bernard](https://www.olivierbernard-art.com/)
 - [u/beardify](https://www.reddit.com/user/beardify/) for inspiring this system with his [Extra Weapon Properties](https://www.reddit.com/r/UnearthedArcana/comments/n6cbwx/new_weapon_properties_mechanics_that_disarm/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) homebrew
 - Personal friends for giving me ideas and editing notes

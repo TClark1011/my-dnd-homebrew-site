@@ -1,6 +1,7 @@
 ---
 title: Chain Initiative
-thumbnail: /og-images/gnoll-camp.jpeg
+banner: /images/gnoll-camp.jpeg
+bannerYPosition: 20%
 hidden: true
 ---
 

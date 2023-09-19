@@ -5,7 +5,8 @@ const homebrewCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     hidden: z.boolean().default(false),
-    thumbnail: z.string().optional(),
+    banner: z.string().optional(),
+    bannerYPosition: z.string().optional(),
   }),
 });
 
