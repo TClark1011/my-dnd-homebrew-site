@@ -6,7 +6,7 @@ import type {
   MarkdownHeading,
 } from "astro";
 import { getCollection, getEntry } from "astro:content";
-import SlideOutPanel from "$/components/SlideOutPanel.astro";
+import SlideOutPanel from "$/components/SlideOutPanel.svelte";
 import * as dndStyles from "$/styles/dnd.css";
 import * as styles from "./slug.css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
@@ -75,8 +75,9 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
   {
     tableOfContentHeadings.length > 0 && (
       <SlideOutPanel
+        client:load
         class:list={[styles.slideOutPanel, dndStyles.dndContainer]}
-        closeOnClickSelector={`${styles.tableOfContents} a`}
+        closeOnClickSelector={`.${styles.tableOfContents} a`}
       >
         <ol class={styles.tableOfContents}>
           {tableOfContentHeadings.map((heading) => (
