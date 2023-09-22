@@ -9,18 +9,9 @@ const allHomebrew = await getCollection(
 ---
 
 <RootLayout>
-  <div class="landing">
-    {
-      allHomebrew.map((item) => (
-        <a href={`/homebrew/${item.slug}`}>{item.data.title}</a>
-      ))
-    }
-  </div>
-</RootLayout>
-
-<style lang="scss">
-  .landing {
-    height: 100vh;
-    width: 100%;
+  {
+    allHomebrew.map((item) => (
+      <a href={`/homebrew/${item.slug}`}>{item.data.title}</a>
+    ))
   }
-</style>
+</RootLayout>

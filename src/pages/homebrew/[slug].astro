@@ -1,6 +1,5 @@
 ---
 import RootLayout from "$/layouts/RootLayout.astro";
-import "../../styles/dnd.scss";
 import type {
   GetStaticPaths,
   InferGetStaticParamsType,
@@ -8,6 +7,9 @@ import type {
 } from "astro";
 import { getCollection, getEntry } from "astro:content";
 import SlideOutPanel from "$/components/SlideOutPanel.astro";
+import * as dndStyles from "$/styles/dnd.css";
+import * as styles from "./slug.css";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 
 export const getStaticPaths = (async () => {
   const allHomebrew = await getCollection("homebrew");
@@ -60,11 +62,29 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
 
 <RootLayout title={entry.data.title} ogImage={entry.data.banner}>
   {
+    entry.data.banner && (
+      <img
+        class={styles.bannerImage}
+        style={assignInlineVars({
+          [styles.varBannerYPosition]: entry.data.bannerYPosition ?? "50%",
+        })}
+        src={entry.data.banner}
+      />
+    )
+  }
+  {
     tableOfContentHeadings.length > 0 && (
-      <SlideOutPanel class="panel dnd" closeOnClickSelector=".toc a">
-        <ol class="toc">
+      <SlideOutPanel
+        class:list={[styles.slideOutPanel, dndStyles.dndContainer]}
+        closeOnClickSelector={`${styles.tableOfContents} a`}
+      >
+        <ol class={styles.tableOfContents}>
           {tableOfContentHeadings.map((heading) => (
-            <li style={`--depth: ${heading.depth}`} data-depth={heading.depth}>
+            <li
+              class={styles.tableOfContentsListItem}
+              style={`--depth: ${heading.depth}`}
+              data-depth={heading.depth}
+            >
               <a href={`#${heading.slug}`}>{heading.text}</a>
             </li>
           ))}
@@ -72,92 +92,9 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
       </SlideOutPanel>
     )
   }
-  {entry.data.banner && <img class="banner-img" src={entry.data.banner} />}
-  <div class="root">
-    <div class="container dnd">
+  <div class={styles.wrapper}>
+    <div class:list={[dndStyles.dndContainer, styles.content]}>
       <Content />
     </div>
   </div>
-
-  <style
-    lang="scss"
-    define:vars={{
-      bannerYPosition: entry.data.bannerYPosition,
-    }}
-  >
-    .panel {
-      padding: 16px;
-
-      $number-offset: 8px;
-
-      .toc {
-        display: flex;
-        flex-direction: column;
-
-        gap: 1rem;
-        li {
-          &[data-depth="1"] {
-            counter-increment: headings;
-            &::before {
-              content: counter(headings) ". ";
-              font-weight: bold;
-              margin-right: $number-offset;
-            }
-          }
-
-          * {
-            font-style: italic;
-          }
-
-          &:not([data-depth="1"]) {
-            --heading-offset: calc(#{$number-offset} + 1rem);
-
-            * {
-              font-style: italic;
-            }
-          }
-
-          display: flex;
-
-          list-style-type: none;
-          margin-left: calc(
-            calc(calc(var(--depth) - 1) * 1rem) + var(--heading-offset)
-          );
-
-          a {
-            display: block;
-            width: 100%;
-          }
-        }
-      }
-    }
-
-    .banner-img {
-      width: 100%;
-      -webkit-mask: url("https://i.imgur.com/zWuWN8O.png"),
-        url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDRUPDw8VFRUVFRUVFRUVFRUVFRUVFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NFQ0NFSsZFR0rKy0tKysrKystKy0tLSsrNy03KystLSsrKy0tKzctKy0tKy0rLS0rKy0rLS0rKysrK//AABEIAMQBAQMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAAAQIH/8QAJRABAAIBAgUEAwAAAAAAAAAAAAHwETGhIUGRsdECUWHhcYHB/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAVEQEBAAAAAAAAAAAAAAAAAAAAIf/aAAwDAQACEQMRAD8A7gAgl/KiACgCXVUugHRS8kuoF4gAAAF9wFLoX3LqAACAKAhdVBLqqXQAvAFAAAAAx8icAFAAAAAAABFAAABFARQAvJFAS2FAAABLot0AAAAAAAAAMgKACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH7AAAAAAAABQAAAAAARQAAAAAAAAAAAAABAAAAAAUAAAAAAEUAQBUAAAAABRAUQBQAAAAAABAAAMgAAAAoAAACCoCoACoAAIAAACgAACgAAAAAAAAACAAAAoAAAAACKIAoAgqIAqAqKiioogigoAAAAAAACGQwFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQFRAEAAAAAAAAUAAAAAlAAAAUAAAAAAABAAAADAAAAAAAAoAAAAAACIKJkBRDIKIAoCgAAAAAIAAAAomFBBAFEBQAAEBRAFBAATKCiEAsjOVBRMqCiKoCAKIoCoAogIogCDWYBUAAELdgVC28gAJJkAygC5EMgAZBJORMHqQCJI1MAoQYUFymQFEAUIIvUALehbsCiW3mtt5AAAvEZ4e4It2S7AKs634QAL3L2QEX7RAVS9vIACALKABBOoAHqACVQBZEAWDwAI15QBYu5F2AQi7F2+wFW/wu+ABrACo/9k=");
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-mode: alpha;
-      -webkit-mask-size:
-        100% 800px,
-        100vw 100vh;
-      -webkit-mask-position:
-        0px 220px,
-        0px -700px;
-      height: 400px;
-      object-fit: cover;
-      object-position: 50% var(--bannerYPosition, 50%);
-    }
-    .root {
-      display: flex;
-      justify-content: center;
-
-      .container {
-        width: 100%;
-        max-width: 800px;
-        padding: 1rem;
-        padding-top: 3rem;
-      }
-    }
-  </style>
 </RootLayout>

@@ -1,10 +1,12 @@
 import { persistentAtom } from "@nanostores/persistent";
 
-export const themeAtom = persistentAtom<string | undefined>(
-  "theme",
-  undefined,
-  {
-    encode: JSON.stringify,
-    decode: JSON.parse,
-  },
-);
+export const themeAtom = persistentAtom<
+  | {
+      id: string;
+      class: string;
+    }
+  | undefined
+>("theme", undefined, {
+  encode: JSON.stringify,
+  decode: JSON.parse,
+});

@@ -1,23 +1,23 @@
 ---
 import ThemeSelection from "../components/ThemeSelection.astro";
-import "../styles/_fonts.scss";
-import "../styles/base.scss";
-import "../styles/apply-theme.scss";
 
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/400-italic.css";
-import "@fontsource/roboto/700.css";
-import "@fontsource/roboto/700-italic.css";
+import "$/styles/globalStyles.css";
+
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/700.css";
+
+import * as styles from "./RootLayout.css";
 
 interface Props {
   title?: string;
   ogImage?: string;
+  class?: string;
 }
 
-const { title = "Astro", ogImage } = Astro.props;
+const { title = "Astro", ogImage, class: className } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-no-theme>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -33,43 +33,21 @@ const { title = "Astro", ogImage } = Astro.props;
       // a flash of unstyled content.
       const theme = JSON.parse(localStorage.getItem("theme") || "undefined");
 
-      if (theme) {
-        document.documentElement.setAttribute("data-theme", theme);
+      if (!"class" in theme) {
+        document.documentElement.setAttribute("data-no-theme", "");
       }
+
+      document.documentElement.classList.add(theme.class);
+      document.documentElement.removeAttribute("data-no-theme");
     </script>
   </head>
-  <body>
-    <header class="top-bar">
+  <body class={styles.body}>
+    <header class={styles.topBar}>
       <a href="/">Home</a>
       <ThemeSelection />
     </header>
-    <slot />
-    <div class="content"></div>
-    <style lang="scss">
-      @use "$/styles/utils/theme.scss" as theme;
-
-      body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-
-        .top-bar {
-          display: flex;
-          align-items: center;
-          padding: 16px;
-          justify-content: space-between;
-
-          height: 56px;
-          width: 100vw;
-
-          background-color: theme.$color-surface-bg;
-        }
-
-        .content {
-          width: 100%;
-          height: 100%;
-        }
-      }
-    </style>
+    <div class:list={[styles.content, className]}>
+      <slot />
+    </div>
   </body>
 </html>

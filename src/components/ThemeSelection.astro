@@ -1,17 +1,20 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { THEMES } from "$/constants/themes";
+import { THEME_LISTINGS } from "$/constants/themeListings";
 export type Props = HTMLAttributes<"select">;
+
+import * as styles from "./ThemeSelection.css";
 ---
 
 <script>
+  import { THEME_LISTINGS } from "$/constants/themeListings";
   import { themeAtom } from "$/stores";
 
   const themeSelectInput =
     document.querySelector<HTMLSelectElement>("#theme-select");
 
   if (themeAtom.value && themeSelectInput) {
-    themeSelectInput.value = themeAtom.value;
+    themeSelectInput.value = themeAtom.value.id;
   }
 
   themeSelectInput?.addEventListener("change", (event) => {
@@ -19,19 +22,28 @@ export type Props = HTMLAttributes<"select">;
 
     if (element.value === "") {
       themeAtom.set(undefined);
-    } else {
-      themeAtom.set(element.value);
+      return;
     }
+    const correspondingThemeListing = THEME_LISTINGS.find(
+      (theme) => theme.id === element.value,
+    );
+
+    if (!correspondingThemeListing) {
+      return;
+    }
+
+    themeAtom.set({
+      class: correspondingThemeListing.class,
+      id: correspondingThemeListing.id,
+    });
   });
 </script>
 
-<select id="theme-select">
+<select id="theme-select" class={styles.select}>
   <option selected value="">Auto</option>
-  {THEMES.map((theme) => <option value={theme.id}>{theme.label}</option>)}
-</select>
-
-<style lang="scss">
-  select {
-    text-align: right;
+  {
+    THEME_LISTINGS.map((theme) => (
+      <option value={theme.id}>{theme.label}</option>
+    ))
   }
-</style>
+</select>
