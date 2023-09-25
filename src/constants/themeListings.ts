@@ -6,24 +6,6 @@ export type ThemeListing = {
   class: string;
 };
 
-// export const THEMES: ThemeListing[] = [
-//   {
-//     id: "ua-light",
-//     label: "Unearthed Arcana (Light)",
-//   },
-//   {
-//     id: "ua-dark",
-//     label: "Unearthed Arcana (Dark)",
-//   },
-//   {
-//     id: "5e-tools-light",
-//     label: "5eTools (Light)",
-//   },
-//   {
-//     id: "5e-tools-dark",
-//     label: "5eTools (Dark)",
-//   },
-// ];
 export const THEME_LISTINGS: ThemeListing[] = [
   {
     id: "ua-light",

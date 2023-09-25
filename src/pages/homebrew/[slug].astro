@@ -45,7 +45,9 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
   .map((heading) => ({
     ...heading,
     depth: heading.depth - 1,
-  }));
+  }))
+  // If the only heading is the "Credits" heading, don't show the table of contents
+  .filter((heading, _, arr) => arr.length > 1 && heading.slug !== "credits");
 ---
 
 <script>

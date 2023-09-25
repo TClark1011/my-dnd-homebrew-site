@@ -1,11 +1,10 @@
 ---
-import ThemeSelection from "../components/ThemeSelection.astro";
-
-import "$/styles/globalStyles.css";
+import ThemeSelection from "$/components/ThemeSelection";
 
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/700.css";
 
+import "$/styles/globalStyles.css";
 import * as styles from "./RootLayout.css";
 
 interface Props {
@@ -33,18 +32,20 @@ const { title = "Astro", ogImage, class: className } = Astro.props;
       // a flash of unstyled content.
       const theme = JSON.parse(localStorage.getItem("theme") || "undefined");
 
+      console.log("Hi!!!");
+
       if (!"class" in theme) {
         document.documentElement.setAttribute("data-no-theme", "");
+      } else {
+        document.documentElement.classList.add(theme.class);
+        document.documentElement.removeAttribute("data-no-theme");
       }
-
-      document.documentElement.classList.add(theme.class);
-      document.documentElement.removeAttribute("data-no-theme");
     </script>
   </head>
   <body class={styles.body}>
     <header class={styles.topBar}>
       <a href="/">Home</a>
-      <ThemeSelection />
+      <ThemeSelection client:load />
     </header>
     <div class:list={[styles.content, className]}>
       <slot />
