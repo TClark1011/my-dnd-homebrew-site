@@ -61,7 +61,7 @@ globalStyle(`${dndContainer} table *`, {
 });
 
 globalStyle(`${dndContainer} table :is(td,th)`, {
-  padding: "0.2rem",
+  padding: "0.2rem 0.6rem",
 });
 
 globalStyle(`${dndContainer} table tbody tr:nth-child(odd)`, {

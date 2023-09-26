@@ -52,13 +52,16 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
 ---
 
 <script>
-  import { elementIsTooWideForScreen } from "$/utils";
+  import { elementIsTooWideForScreen, wrapElement } from "$/utils";
 
   const tables = document.querySelectorAll("table");
 
   tables.forEach((table) => {
     if (elementIsTooWideForScreen(table, 16)) {
-      table.classList.add("shrink");
+      const wrapper = document.createElement("div");
+      wrapElement(table, wrapper);
+
+      wrapper.classList.add("scroll-h");
     }
   });
 </script>
