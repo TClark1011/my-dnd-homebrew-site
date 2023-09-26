@@ -7,4 +7,5 @@ import solidJs from "@astrojs/solid-js";
 export default defineConfig({
   scopedStyleStrategy: "class",
   integrations: [vanillaExtract(), solidJs()],
+  vite: { ssr: { noExternal: ["solid-use"] } },
 });
