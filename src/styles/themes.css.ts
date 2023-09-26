@@ -1,7 +1,10 @@
-import { themeVars, type ThemeDefinition } from "$/styles/themeVars.css";
+import {
+  type ThemeDefinition,
+  createSiteTheme,
+  type ThemeFieldsThatChange,
+} from "$/styles/themeVars.css";
 import type { PartialDeep } from "type-fest";
 import * as fonts from "$/styles/fonts.css";
-import { createTheme } from "@vanilla-extract/css";
 
 const unearthedArcanaDndThemeBase = {
   fonts: {
@@ -42,10 +45,9 @@ export const unearthedArcanaLightThemeValues = {
       tableRowBanding: "#f2f2f2",
     },
   },
-} satisfies ThemeDefinition;
+} satisfies ThemeFieldsThatChange;
 
-export const unearthedArcanaLightTheme = createTheme(
-  themeVars,
+export const unearthedArcanaLightTheme = createSiteTheme(
   unearthedArcanaLightThemeValues,
   "ua-light",
 );
@@ -64,10 +66,9 @@ export const unearthedArcanaDarkThemeValues = {
       tableRowBanding: "#27292e",
     },
   },
-} satisfies ThemeDefinition;
+} satisfies ThemeFieldsThatChange;
 
-export const unearthedArcanaDarkTheme = createTheme(
-  themeVars,
+export const unearthedArcanaDarkTheme = createSiteTheme(
   unearthedArcanaDarkThemeValues,
   "ua-dark",
 );
@@ -92,8 +93,7 @@ const fiveEToolsDndBase = {
   },
 };
 
-export const fiveEToolsLightTheme = createTheme(
-  themeVars,
+export const fiveEToolsLightTheme = createSiteTheme(
   {
     colors: {
       background: "white",
@@ -112,8 +112,7 @@ export const fiveEToolsLightTheme = createTheme(
   "5e-tools-light",
 );
 
-export const fiveEToolsDarkTheme = createTheme(
-  themeVars,
+export const fiveEToolsDarkTheme = createSiteTheme(
   {
     colors: {
       background: "#222222",

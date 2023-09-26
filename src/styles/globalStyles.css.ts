@@ -1,9 +1,9 @@
-import { themeVars } from "$/styles/themeVars.css";
+import { assignSiteThemeVars, themeVars } from "$/styles/themeVars.css";
 import {
   unearthedArcanaDarkThemeValues,
   unearthedArcanaLightThemeValues,
 } from "$/styles/themes.css";
-import { globalStyle, assignVars } from "@vanilla-extract/css";
+import { globalStyle } from "@vanilla-extract/css";
 
 globalStyle("*", {
   margin: 0,
@@ -24,10 +24,10 @@ globalStyle("html", {
 });
 
 globalStyle("html[data-no-theme]", {
-  vars: assignVars(themeVars, unearthedArcanaLightThemeValues),
+  vars: assignSiteThemeVars(unearthedArcanaLightThemeValues),
   "@media": {
     "(prefers-color-scheme: dark)": {
-      vars: assignVars(themeVars, unearthedArcanaDarkThemeValues),
+      vars: assignSiteThemeVars(unearthedArcanaDarkThemeValues),
     },
   },
 });
