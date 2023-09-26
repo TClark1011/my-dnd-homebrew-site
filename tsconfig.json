@@ -6,6 +6,7 @@
     "jsxImportSource": "solid-js",
     "paths": {
       "$/*": ["./src/*"]
-    }
+    },
+    "moduleResolution": "Node"
   }
 }

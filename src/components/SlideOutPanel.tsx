@@ -19,15 +19,16 @@ const SlideOutPanel: ParentComponent<SlideOutPanelProps> = ({
 
   let panel!: HTMLDivElement;
 
-
   createEffect<NodeListOf<Element>>((previousElements) => {
     if (previousElements) {
       previousElements.forEach((el) => {
         el.removeEventListener("click", close);
       });
     }
-    
-    const childrenToCloseOnClick = panel?.querySelectorAll(closeOnClickSelector ?? "")
+
+    const childrenToCloseOnClick = panel?.querySelectorAll(
+      closeOnClickSelector ?? "",
+    );
 
     childrenToCloseOnClick.forEach((el) => {
       el.addEventListener("click", close);
