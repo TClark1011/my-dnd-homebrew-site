@@ -2,6 +2,15 @@
 import RootLayout from "$/layouts/RootLayout.astro";
 import { getCollection } from "astro:content";
 
+import * as styles from "./index.css";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { Image } from "astro:assets";
+
+const CARD_MAX_WIDTH = 300;
+const CARD_MIN_WIDTH = 250;
+
+const CARD_IMAGE_HEIGHT = 120;
+
 const allHomebrew = await getCollection(
   "homebrew",
   (item) => !item.data.hidden,
@@ -9,9 +18,43 @@ const allHomebrew = await getCollection(
 ---
 
 <RootLayout>
-  {
-    allHomebrew.map((item) => (
-      <a href={`/homebrew/${item.slug}`}>{item.data.title}</a>
-    ))
-  }
+  <div
+    class={styles.grid}
+    style={assignInlineVars({
+      [styles.varCardMinWidth]: `${CARD_MIN_WIDTH}px`,
+      [styles.varCardMaxWidth]: `${CARD_MAX_WIDTH}px`,
+      [styles.varCardImageHeight]: `${CARD_IMAGE_HEIGHT}px`,
+    })}
+  >
+    {
+      allHomebrew.map((item) => (
+        <div
+          class={styles.card}
+          style={assignInlineVars({
+            [styles.varCardImagePositionY]: item.data.bannerYPosition ?? "50%",
+          })}
+        >
+          {item.data.banner && (
+            <Image
+              width={CARD_MAX_WIDTH}
+              height={CARD_IMAGE_HEIGHT}
+              class={styles.cardImage}
+              decoding="async"
+              quality={100}
+              loading="lazy"
+              src={item.data.banner}
+              alt="thumbnail"
+            />
+          )}
+          {!item.data.banner && <div class={styles.cardImageDimensions} />}
+          <div class={styles.cardBody}>
+            <a href={`/homebrew/${item.slug}`} class={styles.cardLink}>
+              {item.data.title}
+            </a>
+            <p>{item.data.description}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </RootLayout>

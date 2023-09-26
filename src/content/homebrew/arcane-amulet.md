@@ -1,5 +1,7 @@
 ---
 title: Amulet of Arcane Attunement
+description: A magical amulet that grant its wearer the ability to harness a fraction of their mystical power
+banner: ./amulet.png
 ---
 
 # Amulet of Arcane Attunement

@@ -1,6 +1,7 @@
 ---
 title: Weapon Traits
-banner: /images/choose-your-weapon.png
+description: A system of weapon traits that can make any mundane weapon more interesting.
+banner: ./choose-your-weapon.png
 bannerYPosition: 90%
 ---
 

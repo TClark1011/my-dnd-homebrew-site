@@ -1,5 +1,6 @@
 ---
 title: Style Demo
+description: A demo of the various styles available for use in the homebrew section.
 hidden: true
 ---
 

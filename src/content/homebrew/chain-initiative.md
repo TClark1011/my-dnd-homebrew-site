@@ -1,6 +1,7 @@
 ---
 title: Chain Initiative
-banner: /images/gnoll-camp.jpeg
+description: Speed up combat by reducing the number of initiative rolls that are made at the start of combat
+banner: ./gnoll-camp.jpeg
 bannerYPosition: 20%
 ---
 

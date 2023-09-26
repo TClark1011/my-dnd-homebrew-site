@@ -10,6 +10,7 @@ import SlideOutPanel from "$/components/SlideOutPanel";
 import * as dndStyles from "$/styles/dnd.css";
 import * as styles from "./slug.css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { Image } from "astro:assets";
 
 export const getStaticPaths = (async () => {
   const allHomebrew = await getCollection("homebrew");
@@ -65,11 +66,16 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
 <RootLayout title={entry.data.title} ogImage={entry.data.banner}>
   {
     entry.data.banner && (
-      <img
+      <Image
         class={styles.bannerImage}
         style={assignInlineVars({
           [styles.varBannerYPosition]: entry.data.bannerYPosition ?? "50%",
         })}
+        width="2400"
+        height="500"
+        loading="lazy"
+        decoding="async"
+        alt="banner"
         src={entry.data.banner}
       />
     )
