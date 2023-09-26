@@ -44,6 +44,7 @@ const allHomebrew = await getCollection(
               loading="lazy"
               src={item.data.banner}
               alt="thumbnail"
+              transition:name={item.data.banner.src}
             />
           )}
           {!item.data.banner && <div class={styles.cardImageDimensions} />}

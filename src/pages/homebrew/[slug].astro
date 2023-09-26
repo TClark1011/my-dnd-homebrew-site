@@ -76,6 +76,7 @@ const tableOfContentHeadings = filterOutHiddenHeadings(headings)
         loading="lazy"
         decoding="async"
         alt="banner"
+        transition:name={entry.data.banner.src}
         src={entry.data.banner}
       />
     )

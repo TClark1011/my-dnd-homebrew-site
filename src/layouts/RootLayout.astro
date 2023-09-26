@@ -7,6 +7,8 @@ import "@fontsource/inter/700.css";
 import "$/styles/globalStyles.css";
 import * as styles from "./RootLayout.css";
 
+import { ViewTransitions } from "astro:transitions";
+
 interface Props {
   title?: string;
   ogImage?: string;
@@ -30,17 +32,29 @@ const { title = "Astro", ogImage, class: className } = Astro.props;
       // We have to set the theme as an inline script so that the information
       // is injected into the html tag before the page is rendered. This prevents
       // a flash of unstyled content.
-      const theme = JSON.parse(localStorage.getItem("theme") || "undefined");
 
-      console.log("Hi!!!");
+      if (!window.themeHasBeenUpdated) {
+        const updateTheme = () => {
+          const theme = JSON.parse(
+            localStorage.getItem("theme") || "undefined",
+          );
 
-      if (!"class" in theme) {
-        document.documentElement.setAttribute("data-no-theme", "");
-      } else {
-        document.documentElement.classList.add(theme.class);
-        document.documentElement.removeAttribute("data-no-theme");
+          if (!"class" in theme) {
+            document.documentElement.setAttribute("data-no-theme", "");
+          } else {
+            document.documentElement.classList.add(theme.class);
+            document.documentElement.removeAttribute("data-no-theme");
+          }
+        };
+
+        updateTheme();
+        document.addEventListener("astro:after-swap", updateTheme);
+
+        window.themeHasBeenUpdated = true;
       }
     </script>
+
+    <ViewTransitions />
   </head>
   <body class={styles.body}>
     <header class={styles.topBar}>
