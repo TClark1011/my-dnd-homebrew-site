@@ -11,7 +11,7 @@ const CARD_MIN_WIDTH = 250;
 
 const CARD_IMAGE_HEIGHT = 120;
 
-const allHomebrew = await getCollection(
+const homebrewEntries = await getCollection(
   "homebrew",
   (item) => !item.data.hidden,
 );
@@ -27,14 +27,14 @@ const allHomebrew = await getCollection(
     })}
   >
     {
-      allHomebrew.map((item) => (
+      homebrewEntries.map((entry) => (
         <div
           class={styles.card}
           style={assignInlineVars({
-            [styles.varCardImagePositionY]: item.data.bannerYPosition ?? "50%",
+            [styles.varCardImagePositionY]: entry.data.bannerYPosition ?? "50%",
           })}
         >
-          {item.data.banner && (
+          {entry.data.banner && (
             <Image
               width={CARD_MAX_WIDTH}
               height={CARD_IMAGE_HEIGHT}
@@ -42,17 +42,17 @@ const allHomebrew = await getCollection(
               decoding="async"
               quality={100}
               loading="lazy"
-              src={item.data.banner}
+              src={entry.data.banner}
               alt="thumbnail"
-              transition:name={item.data.banner.src}
+              transition:name={`${entry.slug}-banner`}
             />
           )}
-          {!item.data.banner && <div class={styles.cardImageDimensions} />}
+          {!entry.data.banner && <div class={styles.cardImageDimensions} />}
           <div class={styles.cardBody}>
-            <a href={`/homebrew/${item.slug}`} class={styles.cardLink}>
-              {item.data.title}
+            <a href={`/homebrew/${entry.slug}`} class={styles.cardLink}>
+              {entry.data.title}
             </a>
-            <p>{item.data.description}</p>
+            <p>{entry.data.description}</p>
           </div>
         </div>
       ))
