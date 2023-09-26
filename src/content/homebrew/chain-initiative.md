@@ -2,7 +2,6 @@
 title: Chain Initiative
 banner: /images/gnoll-camp.jpeg
 bannerYPosition: 20%
-hidden: true
 ---
 
 # Initiative Variant: Chain Initiative
@@ -11,7 +10,7 @@ With chain initiative, all combatants are grouped into "sides". When a creature 
 
 _**Side Initiative.**_ In this system, initiative counts correspond to a "side" rather than an individual creature. Each "side" consists of a group of creatures with shared alignment or affiliation, such as player characters, allied NPCs, or monsters from the same faction. At the outset of each combat turn, the currently active side designates a single creature from their group to take their turn. Once a creature has had it's turn it cannot take another until the start of the next round. The first turn of each round always goes to the player characters.
 
-_**Initiative Checks.**_ At the end of a creature's turn, that creature makes an "initiative check" with a DC of 10. On a success, the creature can select another creature from their side to act next. On a failure, a creature from the opposing side gains their turn. The DC for this check increases by 2 with each successful use, resetting to 10 when a new side takes its turn.
+_**Initiative Checks.**_ At the end of a creature's turn, that creature makes an "initiative check" with a DC of 8. On a success, the creature can select another creature from their side to act next. On a failure, a creature from the opposing side gains their turn. The DC for this check increases by 2 with each successful use, resetting to 8 when a new side takes its turn.
 
 When a side that is hostile to the player characters fails the check, the next turn goes to the player characters' side. If the players fail the check and multiple enemy sides vie for the next turn, the Dungeon Master determines which side takes the next action.
 
