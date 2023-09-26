@@ -20,6 +20,7 @@ export const card = style({
   backgroundColor: themeVars.colors.surface,
   overflow: "hidden",
   position: "relative",
+  boxShadow: themeVars.shadows.md,
   selectors: {
     "&:hover, &:focus-within": {
       vars: {
