@@ -1,0 +1,91 @@
+---
+import RootLayout from "$/layouts/RootLayout.astro";
+import * as styles from "./character.css";
+
+const QUESTIONS = [
+  {
+    question:
+      'What was your character’s most recent occupation? What brought them there? What is their "dream occupation", if any?',
+    numberOfBoxes: 1,
+    boxRows: 4,
+  },
+  {
+    question:
+      "What's one interest or hobby that your character has? Where and why did they pick it up?",
+    numberOfBoxes: 1,
+    boxRows: 4,
+  },
+  {
+    question:
+      "Name one secret that your character conceals from others. Why do they keep it a secret? How much would they have to trust someone to reveal it, and under what conditions?",
+    numberOfBoxes: 1,
+    boxRows: 4,
+  },
+  {
+    question:
+      "Name one secret that your character conceals from others. Why do they keep it a secret? How much would they have to trust someone to reveal it, and under what conditions?",
+    numberOfBoxes: 1,
+    boxRows: 4,
+  },
+  {
+    question:
+      "Name two members of your character’s close family—one that they are close to and one that they are not. How does your character feel about these relationships, and what role have they played in your character’s life?",
+    numberOfBoxes: 2,
+    boxRows: 4,
+  },
+  {
+    question:
+      "Name two of your character’s most interesting personality traits that a stranger would remember after encountering them in a crowded tavern.",
+    numberOfBoxes: 2,
+    boxRows: 4,
+  },
+  {
+    question:
+      "Think about the spells, weapons, and tools that your character wields. Where did they learn to use each of them, and why? What kinds of components or materials do they prefer? If they cast spells, what aesthetic helps them stand out? If they wield weapons, what is their “fighting style”?",
+    numberOfBoxes: 1,
+    boxRows: 8,
+  },
+  {
+    question:
+      "What’s one lie your character believes about themselves? What’s one lie they believe about the world?",
+    numberOfBoxes: 1,
+    boxRows: 4,
+  },
+  {
+    question:
+      "What is something your character wants that may not be good for them? What is something your character should understand or do that they cannot or will not do?",
+    numberOfBoxes: 1,
+    boxRows: 4,
+  },
+  {
+    question:
+      "Where, why, and how did your character learn each skill that they are proficient in? List the three most memorable times they have used one or more of their skills (whether they succeeded or failed).",
+    numberOfBoxes: 1,
+    boxRows: 8,
+  },
+];
+---
+
+<RootLayout title="Character Questionnaire">
+  <div class={styles.content}>
+    <h1 class={styles.pageTitle}>Character Questionnaire</h1>
+    <p class={styles.description}>
+      You can fill out this questionnaire when creating a new character to
+      inspire yourself. When your done you can print it out, or export it as a
+      PDF.
+    </p>
+
+    {
+      QUESTIONS.map(({ question, numberOfBoxes, boxRows }) => (
+        <div class={styles.questionWrapper}>
+          <p class={styles.questionHeading}>{question}</p>
+          <div class={styles.questionBoxStack}>
+            {Array.from({ length: numberOfBoxes }).map(() => (
+              <textarea class={styles.questionInput} rows={boxRows} />
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</RootLayout>

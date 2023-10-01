@@ -17,6 +17,16 @@ globalStyle("*", {
   color: themeVars.colors.text,
   fontFamily:
     "Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif",
+
+  "@media": {
+    print: {
+      vars: {
+        [themeVars.colors.text]: "black",
+        [themeVars.colors.background]: "white !important",
+        [themeVars.colors.surface]: "#E5E5E5",
+      },
+    },
+  },
 });
 
 globalStyle("html", {

@@ -1,3 +1,4 @@
+import { container } from "$/styles/utilityStyles.css";
 import { createVar, globalStyle, style } from "@vanilla-extract/css";
 
 export const slideOutPanel = style({
@@ -78,12 +79,13 @@ export const wrapper = style({
   justifyContent: "center",
 });
 
-export const content = style({
-  width: "100%",
-  maxWidth: 800,
-  padding: "1rem",
-  paddingTop: "3rem",
-});
+export const content = style([
+  container,
+  {
+    padding: "1rem",
+    paddingTop: "3rem",
+  },
+]);
 
 globalStyle(".scroll-h", {
   maxWidth: "100%",

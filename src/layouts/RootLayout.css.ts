@@ -16,6 +16,12 @@ export const topBar = style({
   width: "100%",
   padding: "1rem",
   backgroundColor: themeVars.colors.surface,
+
+  "@media": {
+    print: {
+      display: "none",
+    },
+  },
 });
 
 export const content = style({
