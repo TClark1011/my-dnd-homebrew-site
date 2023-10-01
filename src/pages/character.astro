@@ -69,11 +69,22 @@ const QUESTIONS = [
 <RootLayout title="Character Questionnaire">
   <div class={styles.content}>
     <h1 class={styles.pageTitle}>Character Questionnaire</h1>
-    <p class={styles.description}>
-      You can fill out this questionnaire when creating a new character to
-      inspire yourself. When your done you can print it out, or export it as a
-      PDF.
-    </p>
+    <div class={styles.description}>
+      <p>
+        You can fill out this questionnaire when creating a new character to
+        inspire yourself. When your done you can print it out, or export it as a
+        PDF.
+      </p>
+      <p>
+        The questions were taken from
+        <a
+          href="https://www.flutesloot.com/10-questions-for-a-great-dnd-character-backstory/"
+          style="text-decoration: underline;"
+        >
+          this article
+        </a>.
+      </p>
+    </div>
 
     {
       QUESTIONS.map(({ question, numberOfBoxes, boxRows }) => (
