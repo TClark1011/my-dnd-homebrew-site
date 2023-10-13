@@ -29,15 +29,7 @@ type ChainInitiativeTrackerState = {
 export const chainInitiativeTrackerSignal =
   createSignal<ChainInitiativeTrackerState>({
     characterIdsMovedInCurrentRound: [],
-    characters: [
-      {
-        id: "1",
-        health: 16,
-        maxHealth: 16,
-        name: "Goblin",
-        side: "bad",
-      },
-    ],
+    characters: [],
     roundNumber: 0,
   });
 
