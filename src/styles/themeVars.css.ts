@@ -18,6 +18,7 @@ const themeFields = {
   },
   colors: {
     background: "",
+    surfaceAccent: "",
     surface: "",
     text: "",
   },
@@ -50,13 +51,19 @@ const themeFields = {
       spaceBetweenElements: "",
     },
   },
+  radius: {
+    sm: "",
+  },
 };
 
 export const themeVars = createThemeContract(themeFields);
 
 export type ThemeDefinition = typeof themeFields;
 
-export type ThemeFieldsThatChange = StrictOmit<ThemeDefinition, "shadows">;
+export type ThemeFieldsThatChange = StrictOmit<
+  ThemeDefinition,
+  "shadows" | "radius"
+>;
 
 const shadows: ThemeDefinition["shadows"] = {
   base: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)",
@@ -69,11 +76,17 @@ const shadows: ThemeDefinition["shadows"] = {
   none: "0 0 #0000;",
 };
 
+const radii: ThemeDefinition["radius"] = {
+  sm: "4px",
+};
+
+// Shadows will not change between themes so we can just assign them here
 export const createSiteTheme = (theme: ThemeFieldsThatChange, id: string) =>
   createTheme(
     themeVars,
     {
       shadows,
+      radius: radii,
       ...theme,
     },
     id,
@@ -82,5 +95,6 @@ export const createSiteTheme = (theme: ThemeFieldsThatChange, id: string) =>
 export const assignSiteThemeVars = (theme: ThemeFieldsThatChange) =>
   assignVars(themeVars, {
     shadows,
+    radius: radii,
     ...theme,
   });

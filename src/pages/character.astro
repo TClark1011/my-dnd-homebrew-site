@@ -1,4 +1,5 @@
 ---
+import Container from "$/components/Container.astro";
 import RootLayout from "$/layouts/RootLayout.astro";
 import * as styles from "./character.css";
 
@@ -67,7 +68,7 @@ const QUESTIONS = [
 ---
 
 <RootLayout title="Character Questionnaire">
-  <div class={styles.content}>
+  <Container class={styles.content}>
     <h1 class={styles.pageTitle}>Character Questionnaire</h1>
     <div class={styles.description}>
       <p>
@@ -98,5 +99,5 @@ const QUESTIONS = [
         </div>
       ))
     }
-  </div>
+  </Container>
 </RootLayout>

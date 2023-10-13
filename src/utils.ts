@@ -13,3 +13,5 @@ export const wrapElement = (child: Element, wrapper: Element) => {
 
   wrapper.appendChild(child);
 };
+
+export const generateRandomId = () => Math.random().toString(36).substring(2);

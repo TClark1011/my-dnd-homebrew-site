@@ -1,22 +1,19 @@
 import { bookinsanity } from "$/styles/fonts.css";
 import { themeVars } from "$/styles/themeVars.css";
-import { container, hideOnPrint } from "$/styles/utilityStyles.css";
+import { hideOnPrint } from "$/styles/utilityStyles.css";
 import { globalStyle, style } from "@vanilla-extract/css";
 
-export const content = style([
-  container,
-  {
-    maxWidth: "21cm",
-    "@media": {
-      print: {
-        vars: {
-          [themeVars.colors.text]: "black",
-        },
-        maxWidth: "100%",
+export const content = style({
+  maxWidth: "21cm",
+  "@media": {
+    print: {
+      vars: {
+        [themeVars.colors.text]: "black",
       },
+      maxWidth: "100%",
     },
   },
-]);
+});
 
 globalStyle(`.${content} *`, {
   fontFamily: bookinsanity,

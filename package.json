@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/solid-js": "^3.0.1",
     "@fontsource/inter": "^5.0.8",
+    "@modular-forms/solid": "^0.20.0",
     "@nanostores/persistent": "^0.9.1",
     "@vanilla-extract/dynamic": "^2.0.3",
     "astro": "^3.0.13",

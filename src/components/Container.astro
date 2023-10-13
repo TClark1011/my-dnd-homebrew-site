@@ -1,0 +1,14 @@
+---
+import * as utilityStyles from "$/styles/utilityStyles.css";
+
+type Props = {
+  class?: string;
+  id?: string;
+};
+
+const { class: className, id } = Astro.props;
+---
+
+<div class:list={[utilityStyles.container, className]} id={id}>
+  <slot />
+</div>

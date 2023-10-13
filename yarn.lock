@@ -750,6 +750,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@modular-forms/solid@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@modular-forms/solid/-/solid-0.20.0.tgz#7fce5fd983f25be89f4d33906487612adaa6b43c"
+  integrity sha512-CyXoeo2cwNel2N753c+iDzA+4DgtBrLNAS87DY/aODFZG7QoY0A9YSxdUxRf0N5NDwkzmn1O0XqwMP+EAiOHbA==
+
 "@nanostores/persistent@^0.9.1":
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/@nanostores/persistent/-/persistent-0.9.1.tgz#e668c64431dee2c9d7a1b8f7ffc1e9c0806ac227"

@@ -42,6 +42,10 @@ globalStyle("html[data-no-theme]", {
   },
 });
 
+globalStyle(":where(button, a)", {
+  cursor: "pointer",
+});
+
 globalStyle(":where(ul, ol)", {
   paddingLeft: "1rem",
 });
