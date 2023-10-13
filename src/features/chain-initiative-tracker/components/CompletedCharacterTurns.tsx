@@ -1,6 +1,10 @@
-import { chainInitiativeTrackerSignal } from "$/features/chain-initiative-tracker/chainInitiativeTrackerState";
+import {
+  chainInitiativeActions,
+  chainInitiativeTrackerSignal,
+} from "$/features/chain-initiative-tracker/chainInitiativeTrackerState";
 import { type Component, createMemo } from "solid-js";
 import CharacterList from "$/features/chain-initiative-tracker/components/CharacterList";
+import * as styles from "./CompletedCharacterTurns.css";
 
 type CharacterTurnsProps = {
   class?: string;
@@ -19,8 +23,19 @@ const CompletedCharacterTurns: Component<CharacterTurnsProps> = ({
 
   return (
     <div class={className}>
-      <h2>Completed Turns</h2>
-      <CharacterList characters={charactersWhoHaveGoneThisRound()} />
+      <div class={styles.topBar}>
+        <h2>Completed Turns</h2>
+        <button
+          onClick={chainInitiativeActions.markAllCharactersAsNotMoved}
+          class={styles.resetButton}
+        >
+          Reset Turns
+        </button>
+      </div>
+      <CharacterList
+        emptyMessage="no characters have completed their turn yet"
+        characters={charactersWhoHaveGoneThisRound()}
+      />
     </div>
   );
 };

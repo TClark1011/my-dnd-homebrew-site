@@ -4,15 +4,20 @@ import type {
 } from "$/features/chain-initiative-tracker/types";
 import { generateRandomId } from "$/utils";
 import { createSignal } from "solid-js";
+import { produce } from "immer";
 
 const composeCharacterNameRegex = (characterName: string) => {
   return new RegExp(`${characterName}(\s\(\d*\))?`);
 };
 
-const numberInBracketsRegex = /\((\d*)\)/;
+const numberInBracketsRegex = /\((\d*)\)$/;
 const getNumberInBracketsFromString = (string: string) => {
   const match = string.match(numberInBracketsRegex);
   return match ? Number(match[1]) : null;
+};
+
+const removeNumberInBracketsFromEndOfString = (str: string) => {
+  return str.replace(numberInBracketsRegex, "");
 };
 
 type ChainInitiativeTrackerState = {
@@ -38,30 +43,28 @@ export const chainInitiativeTrackerSignal =
 
 const [, setState] = chainInitiativeTrackerSignal;
 
+const updateState = (updater: (state: ChainInitiativeTrackerState) => void) =>
+  setState(produce(updater));
+
 type NewCharacterInput = {
   name: string;
   health: number;
   side: ChainInitiativeTrackerSide;
 };
 
-const deriveStateWithNewCharacter = (
-  state: ChainInitiativeTrackerState,
-  { name, health, side }: NewCharacterInput,
-): ChainInitiativeTrackerState => {
+const composeNewCharacter = ({
+  name,
+  health,
+  side,
+}: NewCharacterInput): ChainInitiativeTrackerCharacter => {
   const newId = generateRandomId();
 
   return {
-    ...state,
-    characters: [
-      ...state.characters,
-      {
-        maxHealth: health,
-        health,
-        id: newId,
-        name,
-        side,
-      },
-    ],
+    maxHealth: health,
+    health,
+    id: newId,
+    name,
+    side,
   };
 };
 
@@ -76,28 +79,30 @@ const deriveCharacterHealthChange = (
 
 export const chainInitiativeActions = {
   addCharacter: (input: NewCharacterInput) => {
-    setState((currentState) =>
-      deriveStateWithNewCharacter(currentState, input),
-    );
+    updateState((draftState) => {
+      const newCharacter = composeNewCharacter(input);
+      draftState.characters.push(newCharacter);
+    });
   },
   copyCharacterWithId: (id: string) => {
-    setState((currentState) => {
-      const characterToCopy = currentState.characters.find(
+    updateState((draftState) => {
+      const characterToCopy = draftState.characters.find(
         (character) => character.id === id,
       );
 
-      if (!characterToCopy) {
-        return currentState;
-      }
+      if (!characterToCopy) throw new Error(`Character not found (id: ${id})`);
+
+      const characterNameWithoutAnyCopyNumber =
+        removeNumberInBracketsFromEndOfString(characterToCopy.name);
 
       const characterNameRegex = composeCharacterNameRegex(
-        characterToCopy.name,
+        characterNameWithoutAnyCopyNumber,
       );
-      const charactersWithSameName = currentState.characters.filter(
-        (character) => characterNameRegex.test(character.name),
+      const charactersWithSameName = draftState.characters.filter((character) =>
+        characterNameRegex.test(character.name),
       );
-      const highestNumberInBrackets: number = charactersWithSameName.reduce(
-        (result: number, character) => {
+      const highestCopyNumber: number | null = charactersWithSameName.reduce(
+        (result: number | null, character) => {
           const numberInBrackets = getNumberInBracketsFromString(
             character.name,
           );
@@ -106,27 +111,30 @@ export const chainInitiativeActions = {
           if (!result) return numberInBrackets;
           return Math.max(result, numberInBrackets);
         },
-        0,
+        null,
       );
 
-      const newCharacterName = `${characterToCopy.name} (${
-        highestNumberInBrackets + 1
+      const newCharacterName = `${characterNameWithoutAnyCopyNumber} (${
+        (highestCopyNumber ?? 0) + 1
       })`;
 
-      return deriveStateWithNewCharacter(currentState, {
-        health: characterToCopy.maxHealth,
+      const newCharacter = composeNewCharacter({
         name: newCharacterName,
+        health: characterToCopy.maxHealth,
         side: characterToCopy.side,
       });
+
+      draftState.characters.push(newCharacter);
     });
   },
   removeCharacterWithId: (id: string) => {
-    setState((currentState) => ({
-      ...currentState,
-      characters: currentState.characters.filter(
+    updateState((draftState) => {
+      const charactersAfterRemoval = draftState.characters.filter(
         (character) => character.id !== id,
-      ),
-    }));
+      );
+
+      draftState.characters = charactersAfterRemoval;
+    });
   },
   setHealthOfCharacter: ({
     health,
@@ -135,47 +143,40 @@ export const chainInitiativeActions = {
     health: number;
     characterId: string;
   }) => {
-    setState((currentState) => ({
-      ...currentState,
-      characters: currentState.characters.map((character) =>
-        character.id === characterId
-          ? deriveCharacterHealthChange(character, health)
-          : character,
-      ),
-    }));
+    updateState((draftState) => {
+      draftState.characters = draftState.characters.map((character) => {
+        const isTargetCharacter = character.id === characterId;
+        if (!isTargetCharacter) return character;
+
+        return deriveCharacterHealthChange(character, health);
+      });
+    });
   },
   markCharacterIdAsMoved: (characterId: string) => {
-    setState((currentState) => ({
-      ...currentState,
-      characterIdsMovedInCurrentRound: [
-        ...currentState.characterIdsMovedInCurrentRound,
-        characterId,
-      ],
-    }));
+    updateState((draftState) => {
+      draftState.characterIdsMovedInCurrentRound.push(characterId);
+    });
   },
   markCharacterIdAsNotMoved: (characterId: string) => {
-    setState((currentState) => ({
-      ...currentState,
-      characterIdsMovedInCurrentRound:
-        currentState.characterIdsMovedInCurrentRound.filter(
+    updateState((draftState) => {
+      const updatedCharactersThatHaveMoved =
+        draftState.characterIdsMovedInCurrentRound.filter(
           (id) => id !== characterId,
-        ),
-    }));
+        );
+
+      draftState.characterIdsMovedInCurrentRound =
+        updatedCharactersThatHaveMoved;
+    });
   },
-  renameCharacter: ({
-    characterId,
-    newName,
-  }: {
-    characterId: string;
-    newName: string;
-  }) => {
-    setState((currentState) => ({
-      ...currentState,
-      characters: currentState.characters.map((character) =>
-        character.id === characterId
-          ? { ...character, name: newName }
-          : character,
-      ),
-    }));
-  },
+  markAllCharactersAsMoved: () =>
+    updateState((draftState) => {
+      const allCharacterIds = draftState.characters.map(
+        (character) => character.id,
+      );
+      draftState.characterIdsMovedInCurrentRound = allCharacterIds;
+    }),
+  markAllCharactersAsNotMoved: () =>
+    updateState((draftState) => {
+      draftState.characterIdsMovedInCurrentRound = [];
+    }),
 };

@@ -1,5 +1,6 @@
 import { themeVars } from "$/styles/themeVars.css";
-import { style } from "@vanilla-extract/css";
+import { mobileMediaQuery } from "$/styles/utils";
+import { createVar, style } from "@vanilla-extract/css";
 
 export const form = style({
   display: "flex",
@@ -7,9 +8,28 @@ export const form = style({
   gap: 16,
 });
 
+const fieldsGridColumns = createVar();
+
+export const fields = style({
+  vars: {
+    [fieldsGridColumns]: "3",
+  },
+  display: "grid",
+  gridTemplateColumns: `repeat(${fieldsGridColumns}, minmax(200px, 1fr))`,
+  gap: 16,
+  "@media": {
+    [`(${mobileMediaQuery})`]: {
+      vars: {
+        [fieldsGridColumns]: "1",
+      },
+    },
+  },
+});
+
 export const fieldWrapper = style({
   display: "flex",
   flexDirection: "column",
+  flexGrow: 1,
 });
 
 export const fieldLabel = style({
@@ -21,7 +41,11 @@ const fieldInputPlaceholderStyles = {
 };
 
 export const fieldInput = style({
-  padding: 4,
+  height: 28,
+  display: "flex",
+  alignItems: "center",
+  paddingLeft: 4,
+  paddingRight: 4,
   borderRadius: 4,
   fontSize: "1rem",
   border: `1px solid ${themeVars.colors.text}`,

@@ -41,68 +41,76 @@ const CreateNewCharacter: Component = () => {
       }}
       class={styles.form}
     >
-      <Field type="string" name="characterName">
-        {(field, props) => (
-          <div class={styles.fieldWrapper}>
-            <label for="name" class={styles.fieldLabel}>
-              Character Name
-            </label>
-            <input
-              id="name"
-              class={styles.fieldInput}
-              placeholder="Character"
-              value={field.value ?? ""}
-              {...props}
-            />
-            {field.error && <div class={styles.fieldError}>{field.error}</div>}
-          </div>
-        )}
-      </Field>
-      <Field type="number" name="health">
-        {(field, props) => (
-          <div class={styles.fieldWrapper}>
-            <label for="health" class={styles.fieldLabel}>
-              Health
-            </label>
-            <input
-              id="health"
-              class={styles.fieldInput}
-              placeholder="Health"
-              type="number"
-              value={field.value ?? ""}
-              {...props}
-            />
-            {field.error && <div class={styles.fieldError}>{field.error}</div>}
-          </div>
-        )}
-      </Field>
-      <Field type="string" name="side">
-        {(field, props) => (
-          <div class={styles.fieldWrapper}>
-            <label for="side" class={styles.fieldLabel}>
-              Side
-            </label>
-            <select
-              value={field.value ?? ""}
-              class={styles.fieldInput}
-              classList={{
-                [styles.fieldInput]: true,
-                [styles.fieldSelectPlaceholder]: !field.value,
-              }}
-              {...props}
-              id="side"
-            >
-              <option value="" hidden disabled>
+      <div class={styles.fields}>
+        <Field type="string" name="characterName">
+          {(field, props) => (
+            <div class={styles.fieldWrapper}>
+              <label for="name" class={styles.fieldLabel}>
+                Character Name
+              </label>
+              <input
+                id="name"
+                class={styles.fieldInput}
+                placeholder="Character"
+                value={field.value ?? ""}
+                {...props}
+              />
+              {field.error && (
+                <div class={styles.fieldError}>{field.error}</div>
+              )}
+            </div>
+          )}
+        </Field>
+        <Field type="number" name="health">
+          {(field, props) => (
+            <div class={styles.fieldWrapper}>
+              <label for="health" class={styles.fieldLabel}>
+                Health
+              </label>
+              <input
+                id="health"
+                class={styles.fieldInput}
+                placeholder="Health"
+                type="number"
+                value={field.value ?? ""}
+                {...props}
+              />
+              {field.error && (
+                <div class={styles.fieldError}>{field.error}</div>
+              )}
+            </div>
+          )}
+        </Field>
+        <Field type="string" name="side">
+          {(field, props) => (
+            <div class={styles.fieldWrapper}>
+              <label for="side" class={styles.fieldLabel}>
                 Side
-              </option>
-              {chainInitiativeSideSchema.options.map((option) => (
-                <option value={option}>{titleCase(option)}</option>
-              ))}
-            </select>
-            {field.error && <div class={styles.fieldError}>{field.error}</div>}
-          </div>
-        )}
-      </Field>
+              </label>
+              <select
+                value={field.value ?? ""}
+                class={styles.fieldInput}
+                classList={{
+                  [styles.fieldInput]: true,
+                  [styles.fieldSelectPlaceholder]: !field.value,
+                }}
+                {...props}
+                id="side"
+              >
+                <option value="" hidden disabled>
+                  Side
+                </option>
+                {chainInitiativeSideSchema.options.map((option) => (
+                  <option value={option}>{titleCase(option)}</option>
+                ))}
+              </select>
+              {field.error && (
+                <div class={styles.fieldError}>{field.error}</div>
+              )}
+            </div>
+          )}
+        </Field>
+      </div>
       <button class={styles.submitButton} type="submit">
         Add Character
       </button>

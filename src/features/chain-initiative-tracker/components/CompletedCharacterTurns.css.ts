@@ -1,7 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
-export const list = style({
+export const topBar = style({
   display: "flex",
-  flexDirection: "column",
-  gap: 4,
+  justifyContent: "space-between",
+  width: "100%",
+});
+
+export const resetButton = style({
+  border: "1px solid",
+  padding: "2px 6px",
+  borderRadius: 4,
 });
