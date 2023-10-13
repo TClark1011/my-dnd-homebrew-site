@@ -1,7 +1,4 @@
-import {
-  chainInitiativeActions,
-  chainInitiativeTrackerSignal,
-} from "~chain-initiative-tracker/chainInitiativeTrackerState";
+import { chainInitiativeTrackerSignal } from "~chain-initiative-tracker/chainInitiativeTrackerState";
 import CharacterList from "~chain-initiative-tracker/components/CharacterList";
 import { createMemo, type Component } from "solid-js";
 
@@ -18,7 +15,7 @@ const NonCompletedCharacterTurns: Component<{ class?: string }> = ({
 
   return (
     <div class={className}>
-      <h2>Uncompleted Turns</h2>
+      <h3>Characters</h3>
       <CharacterList
         emptyMessage="all characters have completed their turn this round"
         characters={charactersWhoHaveNotGoneYet()}

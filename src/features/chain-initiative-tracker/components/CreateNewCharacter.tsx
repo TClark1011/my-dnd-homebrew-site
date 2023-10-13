@@ -12,7 +12,7 @@ const newCharacterFormSchema = z.object({
     .number({
       invalid_type_error: "Health is required",
     })
-    .min(1)
+    .min(0, "Cannot be negative")
     .int(),
   side: chainInitiativeSideSchema,
 });
@@ -31,7 +31,7 @@ const CreateNewCharacter: Component = () => {
 
   return (
     <Form
-      onSubmit={(data) => {
+      onSubmit={(data, e) => {
         chainInitiativeActions.addCharacter({
           health: data.health,
           name: data.characterName,

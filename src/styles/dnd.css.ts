@@ -27,6 +27,11 @@ globalStyle(`${dndContainer} :is(h1,h2,h3,h4,h5,h6)`, {
   color: themeVars.dnd.colors.headingText,
 });
 
+globalStyle(`${dndContainer} hr`, {
+  borderBottom: `1px solid ${themeVars.colors.text}`,
+  margin: "16px 0",
+});
+
 globalStyle(`${dndContainer} h1`, {
   fontSize: themeVars.dnd.fontSizes.h1,
 });

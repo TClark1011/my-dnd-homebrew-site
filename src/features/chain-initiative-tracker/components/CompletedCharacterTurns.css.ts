@@ -6,8 +6,13 @@ export const topBar = style({
   width: "100%",
 });
 
+export const header = style({
+  marginBottom: "0 !important",
+});
+
 export const resetButton = style({
   border: "1px solid",
-  padding: "2px 6px",
+  padding: "4px 8px",
+  height: "max-content",
   borderRadius: 4,
 });

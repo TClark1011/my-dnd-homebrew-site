@@ -24,7 +24,7 @@ const CompletedCharacterTurns: Component<CharacterTurnsProps> = ({
   return (
     <div class={className}>
       <div class={styles.topBar}>
-        <h2>Completed Turns</h2>
+        <h3 class={styles.header}>Completed Turns</h3>
         <button
           onClick={chainInitiativeActions.markAllCharactersAsNotMoved}
           class={styles.resetButton}

@@ -5,7 +5,7 @@ import * as styles from "./ChainInitiativeTracker.css";
 import NonCompletedCharacterTurns from "~chain-initiative-tracker/components/NonCompletedCharacterTurns";
 
 const ChainInitiativeTracker: Component = () => (
-  <div>
+  <div class={styles.root}>
     <div class={styles.turnListsContainer}>
       <NonCompletedCharacterTurns />
       <CompletedCharacterTurns class={styles.completedTurns} />

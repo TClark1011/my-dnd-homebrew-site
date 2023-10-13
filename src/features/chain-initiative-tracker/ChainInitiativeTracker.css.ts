@@ -1,6 +1,12 @@
 import { mobileMediaQuery } from "$/styles/utils";
 import { createVar, style } from "@vanilla-extract/css";
 
+export const root = style({
+  padding: 16,
+  borderRadius: 8,
+  backgroundColor: "rgba(0,0,0,0.1)",
+});
+
 const listsContainerColumns = createVar();
 
 export const turnListsContainer = style({
