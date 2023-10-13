@@ -6,7 +6,7 @@ import NonCompletedCharacterTurns from "~chain-initiative-tracker/components/Non
 
 const ChainInitiativeTracker: Component = () => (
   <div>
-    <div class={styles.lists}>
+    <div class={styles.turnListsContainer}>
       <NonCompletedCharacterTurns />
       <CompletedCharacterTurns class={styles.completedTurns} />
     </div>

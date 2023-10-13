@@ -37,6 +37,7 @@ export const unearthedArcanaLightThemeValues = {
     surface: "#B3B3B3",
     surfaceAccent: "#F9F9F9",
     text: "black",
+    fadedText: "#666",
   },
   dnd: {
     ...unearthedArcanaDndThemeBase,
@@ -59,6 +60,7 @@ export const unearthedArcanaDarkThemeValues = {
     surface: "#202124",
     surfaceAccent: "#2F3035",
     text: "#d3d5d8",
+    fadedText: "#999",
   },
   dnd: {
     ...unearthedArcanaDndThemeBase,
@@ -102,6 +104,7 @@ export const fiveEToolsLightTheme = createSiteTheme(
       surface: "#e6e6e6",
       surfaceAccent: "#C5C5C5",
       text: "#333",
+      fadedText: "#666",
     },
     dnd: {
       ...fiveEToolsDndBase,
@@ -120,6 +123,7 @@ export const fiveEToolsDarkTheme = createSiteTheme(
     colors: {
       background: "#222222",
       text: "#bbb",
+      fadedText: "#666",
       surface: "#333333",
       surfaceAccent: "#444444",
     },

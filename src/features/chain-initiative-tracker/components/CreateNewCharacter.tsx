@@ -1,12 +1,20 @@
 import { chainInitiativeActions } from "$/features/chain-initiative-tracker/chainInitiativeTrackerState";
 import { createForm, reset, zodForm } from "@modular-forms/solid";
 import { z } from "astro/zod";
-import { createEffect, type Component } from "solid-js";
+import { type Component } from "solid-js";
 import * as styles from "./CreateNewCharacter.css";
+import { chainInitiativeSideSchema } from "~chain-initiative-tracker/types";
+import { titleCase } from "$/utils";
 
 const newCharacterFormSchema = z.object({
-  characterName: z.string().nonempty(),
-  health: z.number().min(1).int(),
+  characterName: z.string().nonempty("Character name is required"),
+  health: z
+    .number({
+      invalid_type_error: "Health is required",
+    })
+    .min(1)
+    .int(),
+  side: chainInitiativeSideSchema,
 });
 
 const CreateNewCharacter: Component = () => {
@@ -17,6 +25,7 @@ const CreateNewCharacter: Component = () => {
     initialValues: {
       characterName: "",
       health: undefined,
+      side: undefined,
     },
   });
 
@@ -26,7 +35,7 @@ const CreateNewCharacter: Component = () => {
         chainInitiativeActions.addCharacter({
           health: data.health,
           name: data.characterName,
-          side: "good",
+          side: data.side,
         });
         reset(form);
       }}
@@ -45,7 +54,7 @@ const CreateNewCharacter: Component = () => {
               value={field.value ?? ""}
               {...props}
             />
-            {field.error && <div>{field.error}</div>}
+            {field.error && <div class={styles.fieldError}>{field.error}</div>}
           </div>
         )}
       </Field>
@@ -63,7 +72,34 @@ const CreateNewCharacter: Component = () => {
               value={field.value ?? ""}
               {...props}
             />
-            {field.error && <div>{field.error}</div>}
+            {field.error && <div class={styles.fieldError}>{field.error}</div>}
+          </div>
+        )}
+      </Field>
+      <Field type="string" name="side">
+        {(field, props) => (
+          <div class={styles.fieldWrapper}>
+            <label for="side" class={styles.fieldLabel}>
+              Side
+            </label>
+            <select
+              value={field.value ?? ""}
+              class={styles.fieldInput}
+              classList={{
+                [styles.fieldInput]: true,
+                [styles.fieldSelectPlaceholder]: !field.value,
+              }}
+              {...props}
+              id="side"
+            >
+              <option value="" hidden disabled>
+                Side
+              </option>
+              {chainInitiativeSideSchema.options.map((option) => (
+                <option value={option}>{titleCase(option)}</option>
+              ))}
+            </select>
+            {field.error && <div class={styles.fieldError}>{field.error}</div>}
           </div>
         )}
       </Field>

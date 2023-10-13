@@ -21,6 +21,7 @@ const themeFields = {
     surfaceAccent: "",
     surface: "",
     text: "",
+    fadedText: "",
   },
   dnd: {
     colors: {
