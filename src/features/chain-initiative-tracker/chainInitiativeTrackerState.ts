@@ -45,16 +45,43 @@ const characterSorterAlphabetically = (
   b: ChainInitiativeTrackerCharacter,
 ) => a.name.localeCompare(b.name);
 
+const characterSorterBracketNumber = (
+  a: ChainInitiativeTrackerCharacter,
+  b: ChainInitiativeTrackerCharacter,
+) => {
+  const characterANumber = getNumberInBracketsFromString(a.name);
+  const characterAWithoutNumber = removeNumberInBracketsFromEndOfString(
+    a.name,
+  ).trim();
+  const characterBNumber = getNumberInBracketsFromString(b.name);
+  const characterBWithoutNumber = removeNumberInBracketsFromEndOfString(
+    b.name,
+  ).trim();
+
+  if (
+    characterANumber === null ||
+    characterBNumber === null ||
+    characterAWithoutNumber !== characterBWithoutNumber
+  )
+    return 0;
+
+  const result = characterANumber > characterBNumber ? 1 : -1;
+
+  return result;
+};
+
 const characterSorterBySide = (
   a: ChainInitiativeTrackerCharacter,
   b: ChainInitiativeTrackerCharacter,
-) => sideToSortScore[a.side] - sideToSortScore[b.side];
+) =>
+  a.side === b.side ? 0 : sideToSortScore[a.side] - sideToSortScore[b.side];
 
 const sortCharacterList = (
   characters: ChainInitiativeTrackerCharacter[],
 ): ChainInitiativeTrackerCharacter[] =>
   [...characters]
     .sort(characterSorterAlphabetically)
+    .sort(characterSorterBracketNumber)
     .sort(characterSorterBySide);
 
 export const charactersThatHaveNotMoved = createMemo(() => {
