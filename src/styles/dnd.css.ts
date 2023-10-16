@@ -1,5 +1,9 @@
 import { themeVars } from "$/styles/themeVars.css";
-import { globalStyle, style } from "@vanilla-extract/css";
+import {
+  globalStyle,
+  style,
+  type ComplexStyleRule,
+} from "@vanilla-extract/css";
 
 export const dndContainer = style({});
 
@@ -21,40 +25,68 @@ globalStyle(`${dndContainer} :is(p,blockquote,li)`, {
   lineHeight: themeVars.dnd.spacing.paragraphLineHeight,
 });
 
-globalStyle(`${dndContainer} :is(h1,h2,h3,h4,h5,h6)`, {
+export const dndHeaderStyles: ComplexStyleRule = {
   fontFamily: themeVars.dnd.fonts.headings,
   marginBottom: themeVars.dnd.spacing.headingsMarginBottom,
   color: themeVars.dnd.colors.headingText,
-});
+};
+
+export const dndHeader = style(dndHeaderStyles);
+
+globalStyle(`${dndContainer} :is(h1,h2,h3,h4,h5,h6)`, dndHeaderStyles);
 
 globalStyle(`${dndContainer} hr`, {
   borderBottom: `1px solid ${themeVars.colors.text}`,
   margin: "16px 0",
 });
 
-globalStyle(`${dndContainer} h1`, {
+const dndH1Styles: ComplexStyleRule = {
   fontSize: themeVars.dnd.fontSizes.h1,
-});
+};
 
-globalStyle(`${dndContainer} h2`, {
+export const dndH1 = style([dndHeader, dndH1Styles]);
+
+globalStyle(`${dndContainer} h1`, dndH1Styles);
+
+const dndH2Styles: ComplexStyleRule = {
   fontSize: themeVars.dnd.fontSizes.h2,
-});
+};
 
-globalStyle(`${dndContainer} h3`, {
+export const dndH2 = style([dndHeader, dndH2Styles]);
+
+globalStyle(`${dndContainer} h2`, dndH2Styles);
+
+const dndH3Styles: ComplexStyleRule = {
   fontSize: themeVars.dnd.fontSizes.h3,
-});
+};
 
-globalStyle(`${dndContainer} h4`, {
+export const dndH3 = style([dndHeader, dndH3Styles]);
+
+globalStyle(`${dndContainer} h3`, dndH3Styles);
+
+const dndH4Styles: ComplexStyleRule = {
   fontSize: themeVars.dnd.fontSizes.h4,
-});
+};
 
-globalStyle(`${dndContainer} h5`, {
+export const dndH4 = style([dndHeader, dndH4Styles]);
+
+globalStyle(`${dndContainer} h4`, dndH4Styles);
+
+const dndH5Styles: ComplexStyleRule = {
   fontSize: themeVars.dnd.fontSizes.h5,
-});
+};
 
-globalStyle(`${dndContainer} h6`, {
+export const dndH5 = style([dndHeader, dndH5Styles]);
+
+globalStyle(`${dndContainer} h5`, dndH5Styles);
+
+const dndH6Styles: ComplexStyleRule = {
   fontSize: themeVars.dnd.fontSizes.h6,
-});
+};
+
+export const dndH6 = style([dndHeader, dndH6Styles]);
+
+globalStyle(`${dndContainer} h6`, dndH6Styles);
 
 globalStyle(`${dndContainer} table`, {
   width: "100%",
@@ -71,6 +103,12 @@ globalStyle(`${dndContainer} table :is(td,th)`, {
 
 globalStyle(`${dndContainer} table tbody tr:nth-child(odd)`, {
   backgroundColor: themeVars.dnd.colors.tableRowBanding,
+});
+
+globalStyle(`${dndContainer} a`, {
+  fontWeight: "bold",
+  textDecoration: "underline",
+  fontStyle: "italic",
 });
 
 globalStyle(`${dndContainer} blockquote`, {
@@ -90,13 +128,6 @@ globalStyle(`${dndContainer} p + p`, {
 // it starts with bold text, we indent it anyway
 globalStyle(`${dndContainer} *:not(p) + p > strong:first-child`, {
   marginLeft: themeVars.dnd.spacing.paragraphFirstLineIndent,
-});
-
-// Make sure links within the credits section stand out
-globalStyle(`${dndContainer} #credits ~ * a`, {
-  fontWeight: "bold",
-  textDecoration: "underline",
-  fontStyle: "italic",
 });
 
 // Hide hidden content

@@ -5,6 +5,11 @@ import {
 } from "$/styles/themes.css";
 import { globalStyle } from "@vanilla-extract/css";
 
+globalStyle("html", {
+  fontFamily:
+    "Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif",
+});
+
 globalStyle("*", {
   margin: 0,
   padding: 0,
@@ -13,10 +18,7 @@ globalStyle("*", {
   fontStyle: "normal",
   background: "none",
   border: "none",
-
   color: themeVars.colors.text,
-  fontFamily:
-    "Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif",
 
   "@media": {
     print: {

@@ -1,10 +1,15 @@
+import { themeVars } from "$/styles/themeVars.css";
 import { mobileMediaQuery } from "$/styles/utils";
-import { createVar, style } from "@vanilla-extract/css";
+import { createVar, globalStyle, style } from "@vanilla-extract/css";
 
 export const root = style({
   padding: 16,
   borderRadius: 8,
   backgroundColor: "rgba(0,0,0,0.1)",
+});
+
+globalStyle(`.${root}`, {
+  fontFamily: themeVars.dnd.fonts.body,
 });
 
 const listsContainerColumns = createVar();

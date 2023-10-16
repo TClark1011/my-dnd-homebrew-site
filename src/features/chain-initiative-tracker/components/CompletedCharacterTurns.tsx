@@ -5,6 +5,7 @@ import {
 import { type Component, createMemo } from "solid-js";
 import CharacterList from "$/features/chain-initiative-tracker/components/CharacterList";
 import * as styles from "./CompletedCharacterTurns.css";
+import * as dndStyles from "$/styles/dnd.css";
 
 type CharacterTurnsProps = {
   class?: string;
@@ -24,7 +25,9 @@ const CompletedCharacterTurns: Component<CharacterTurnsProps> = ({
   return (
     <div class={className}>
       <div class={styles.topBar}>
-        <h3 class={styles.header}>Completed Turns</h3>
+        <h3 classList={{ [styles.header]: true, [dndStyles.dndH3]: true }}>
+          Completed Turns
+        </h3>
         <button
           onClick={chainInitiativeActions.markAllCharactersAsNotMoved}
           class={styles.resetButton}

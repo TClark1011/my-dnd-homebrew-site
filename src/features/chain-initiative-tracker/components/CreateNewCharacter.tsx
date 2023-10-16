@@ -3,8 +3,17 @@ import { createForm, reset, zodForm } from "@modular-forms/solid";
 import { z } from "astro/zod";
 import { type Component } from "solid-js";
 import * as styles from "./CreateNewCharacter.css";
-import { chainInitiativeSideSchema } from "~chain-initiative-tracker/types";
+import {
+  chainInitiativeSideSchema,
+  type ChainInitiativeTrackerSide,
+} from "~chain-initiative-tracker/types";
 import { titleCase } from "$/utils";
+
+const DEFAULT_CHAIN_INITIATIVE_SIDE: ChainInitiativeTrackerSide = "bad";
+
+const chainInitiativeOptions: ChainInitiativeTrackerSide[] = [
+  ...chainInitiativeSideSchema.options,
+].sort((a) => (a === DEFAULT_CHAIN_INITIATIVE_SIDE ? -1 : 1));
 
 const newCharacterFormSchema = z.object({
   characterName: z.string().nonempty("Character name is required"),
@@ -24,14 +33,14 @@ const CreateNewCharacter: Component = () => {
     validate: zodForm(newCharacterFormSchema),
     initialValues: {
       characterName: "",
-      health: undefined,
-      side: undefined,
+      health: 0,
+      side: DEFAULT_CHAIN_INITIATIVE_SIDE,
     },
   });
 
   return (
     <Form
-      onSubmit={(data, e) => {
+      onSubmit={(data) => {
         chainInitiativeActions.addCharacter({
           health: data.health,
           name: data.characterName,
@@ -97,10 +106,10 @@ const CreateNewCharacter: Component = () => {
                 {...props}
                 id="side"
               >
-                <option value="" hidden disabled>
+                {/* <option value="" hidden disabled>
                   Side
-                </option>
-                {chainInitiativeSideSchema.options.map((option) => (
+                </option> */}
+                {chainInitiativeOptions.map((option) => (
                   <option value={option}>{titleCase(option)}</option>
                 ))}
               </select>
