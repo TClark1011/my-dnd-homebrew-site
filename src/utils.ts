@@ -21,3 +21,13 @@ export const titleCase = (str: string) =>
     .split(" ")
     .map((word) => word[0]?.toUpperCase() + word.slice(1))
     .join(" ");
+
+export const keyboardCommand = (
+  event: KeyboardEvent,
+  key: string,
+  callback: (e: KeyboardEvent) => void,
+) => {
+  if (event.key === key) {
+    callback(event);
+  }
+};

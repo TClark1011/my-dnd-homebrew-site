@@ -3,7 +3,7 @@ import type {
   ChainInitiativeTrackerSide,
 } from "$/features/chain-initiative-tracker/types";
 import { generateRandomId } from "$/utils";
-import { createSignal } from "solid-js";
+import { createMemo, createSignal } from "solid-js";
 import { produce } from "immer";
 
 const composeCharacterNameRegex = (characterName: string) => {
@@ -33,7 +33,47 @@ export const chainInitiativeTrackerSignal =
     roundNumber: 0,
   });
 
-const [, setState] = chainInitiativeTrackerSignal;
+const [state, setState] = chainInitiativeTrackerSignal;
+
+const sideToSortScore: Record<ChainInitiativeTrackerSide, number> = {
+  bad: 1,
+  good: -1,
+};
+
+const characterSorterAlphabetically = (
+  a: ChainInitiativeTrackerCharacter,
+  b: ChainInitiativeTrackerCharacter,
+) => a.name.localeCompare(b.name);
+
+const characterSorterBySide = (
+  a: ChainInitiativeTrackerCharacter,
+  b: ChainInitiativeTrackerCharacter,
+) => sideToSortScore[a.side] - sideToSortScore[b.side];
+
+const sortCharacterList = (
+  characters: ChainInitiativeTrackerCharacter[],
+): ChainInitiativeTrackerCharacter[] =>
+  [...characters]
+    .sort(characterSorterAlphabetically)
+    .sort(characterSorterBySide);
+
+export const charactersThatHaveNotMoved = createMemo(() => {
+  const theCharacters = state().characters.filter(
+    (char) => !state().characterIdsMovedInCurrentRound.includes(char.id),
+  );
+
+  const sorted = sortCharacterList(theCharacters);
+  return sorted;
+});
+
+export const charactersThatHaveMoved = createMemo(() => {
+  const theCharacters = state().characters.filter((char) =>
+    state().characterIdsMovedInCurrentRound.includes(char.id),
+  );
+
+  const sorted = sortCharacterList(theCharacters);
+  return sorted;
+});
 
 const updateState = (updater: (state: ChainInitiativeTrackerState) => void) =>
   setState(produce(updater));

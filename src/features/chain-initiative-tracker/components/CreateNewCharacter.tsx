@@ -1,4 +1,4 @@
-import { chainInitiativeActions } from "$/features/chain-initiative-tracker/chainInitiativeTrackerState";
+import { chainInitiativeActions } from "~chain-initiative-tracker/chainInitiativeTrackerState";
 import { createForm, reset, zodForm } from "@modular-forms/solid";
 import { z } from "astro/zod";
 import { type Component } from "solid-js";
@@ -7,7 +7,9 @@ import {
   chainInitiativeSideSchema,
   type ChainInitiativeTrackerSide,
 } from "~chain-initiative-tracker/types";
-import { titleCase } from "$/utils";
+import { keyboardCommand, titleCase } from "$/utils";
+import { emulateTab } from "$/lib/emulate-tab";
+import type { HTMLTag } from "astro/types";
 
 const DEFAULT_CHAIN_INITIATIVE_SIDE: ChainInitiativeTrackerSide = "bad";
 
@@ -38,6 +40,8 @@ const CreateNewCharacter: Component = () => {
     },
   });
 
+  let firstInputElement: HTMLInputElement | undefined = undefined;
+
   return (
     <Form
       onSubmit={(data) => {
@@ -47,8 +51,22 @@ const CreateNewCharacter: Component = () => {
           side: data.side,
         });
         reset(form);
+        firstInputElement?.focus();
       }}
       class={styles.form}
+      onKeyDown={(event) => {
+        keyboardCommand(event, "Enter", (e) => {
+          const currentFocusedElement = document.activeElement;
+          const currentFocusedElementTag =
+            currentFocusedElement?.tagName?.toLowerCase() as HTMLTag | null;
+
+          if (currentFocusedElementTag && currentFocusedElementTag === "button")
+            return;
+
+          e.preventDefault();
+          emulateTab();
+        });
+      }}
     >
       <div class={styles.fields}>
         <Field type="string" name="characterName">
@@ -63,6 +81,10 @@ const CreateNewCharacter: Component = () => {
                 placeholder="Character"
                 value={field.value ?? ""}
                 {...props}
+                ref={(e) => {
+                  firstInputElement = e;
+                  props.ref(e);
+                }}
               />
               {field.error && (
                 <div class={styles.fieldError}>{field.error}</div>
@@ -106,9 +128,6 @@ const CreateNewCharacter: Component = () => {
                 {...props}
                 id="side"
               >
-                {/* <option value="" hidden disabled>
-                  Side
-                </option> */}
                 {chainInitiativeOptions.map((option) => (
                   <option value={option}>{titleCase(option)}</option>
                 ))}
@@ -120,9 +139,7 @@ const CreateNewCharacter: Component = () => {
           )}
         </Field>
       </div>
-      <button class={styles.submitButton} type="submit">
-        Add Character
-      </button>
+      <button class={styles.submitButton}>Add Character</button>
     </Form>
   );
 };

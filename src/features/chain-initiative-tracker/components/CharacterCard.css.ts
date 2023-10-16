@@ -4,34 +4,35 @@ import { style } from "@vanilla-extract/css";
 export const card = style({
   display: "flex",
   alignItems: "center",
+  justifyContent: "space-between",
   gap: 8,
   border: `1px solid ${themeVars.colors.text}`,
   borderRadius: themeVars.radius.sm,
-  paddingLeft: 0,
-  paddingRight: 8,
+  padding: "0 8px",
   height: 48,
   width: "100%",
   overflow: "hidden",
 });
 
-export const sideTab = style({
-  width: 16,
-  height: "100%",
+export const left = style({
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+});
+
+export const sideIndicator = style({
+  width: 8,
+  height: 8,
+  borderRadius: "100%",
+  opacity: 0.6,
 });
 
 export const green = style({
-  backgroundColor: "rgba(0, 255, 0, 0.5)",
+  backgroundColor: "rgba(0, 255, 0)",
 });
 
 export const red = style({
-  backgroundColor: "rgba(255, 0, 0, 0.5)",
-});
-
-export const content = style({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "100%",
+  backgroundColor: "rgba(255, 0, 0)",
 });
 
 export const characterLabel = style({

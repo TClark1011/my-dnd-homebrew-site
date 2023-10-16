@@ -1,8 +1,8 @@
 import {
   chainInitiativeActions,
-  chainInitiativeTrackerSignal,
+  charactersThatHaveMoved,
 } from "$/features/chain-initiative-tracker/chainInitiativeTrackerState";
-import { type Component, createMemo } from "solid-js";
+import { type Component } from "solid-js";
 import CharacterList from "$/features/chain-initiative-tracker/components/CharacterList";
 import * as styles from "./CompletedCharacterTurns.css";
 import * as dndStyles from "$/styles/dnd.css";
@@ -14,14 +14,6 @@ type CharacterTurnsProps = {
 const CompletedCharacterTurns: Component<CharacterTurnsProps> = ({
   class: className,
 }) => {
-  const [state] = chainInitiativeTrackerSignal;
-
-  const charactersWhoHaveGoneThisRound = createMemo(() =>
-    state().characters.filter((character) =>
-      state().characterIdsMovedInCurrentRound.includes(character.id),
-    ),
-  );
-
   return (
     <div class={className}>
       <div class={styles.topBar}>
@@ -37,7 +29,7 @@ const CompletedCharacterTurns: Component<CharacterTurnsProps> = ({
       </div>
       <CharacterList
         emptyMessage="no characters have completed their turn yet"
-        characters={charactersWhoHaveGoneThisRound()}
+        characters={charactersThatHaveMoved()}
       />
     </div>
   );
