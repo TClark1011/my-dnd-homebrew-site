@@ -28,7 +28,7 @@ As a bonus action, you can activate the consumed healing factor of the Ice Troll
 
 You have advantage on spell saving throws that target only you (not area of effect spells).
 
-## Basilisk
+### Basilisk
 
 Once per long rest you can target a number of creatures you can see and that can see you equal to your proficiency bonus. The creatures make a constitution saving throw, on a failure a thin layer of stone forms over their skin, they are restrained until the start of your next turn.
 
